@@ -5,7 +5,7 @@ bodyParser = require('body-parser'),
 subtract = require('./lib/subtract'),
 app = express();
 var port = 3000;
-const passport = require('passport');
+//const passport = require('passport');
 
 
 //db connection
@@ -20,10 +20,10 @@ mongoose.connection.on('connected',function(req,res){
 app.use(bodyParser.json());
 
 //passport middleware. Used for authentication
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 
-require('./config/passport')(passport);
+//require('./config/passport')(passport);
 
 //routes to users
 const users = require('./routes/users');
