@@ -25,6 +25,7 @@
     "express": "*",
     "body-parser": "*",
     "path":"*",
-    "bcryptjs": "*"
+    "bcryptjs": "*",
+    "passport-jwt":"*"
   }
 }
