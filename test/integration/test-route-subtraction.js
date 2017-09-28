@@ -1,6 +1,6 @@
 var supertest = require('supertest'),
 assert = require('assert'),
-app = require('../../app');
+app = require('../../app.js');
 
 exports.addition_should_respond_with_a_numeric_result = function(done){
   supertest(app)
@@ -12,4 +12,3 @@ exports.addition_should_respond_with_a_numeric_result = function(done){
     return done();
   });
 };
-

@@ -1,41 +1,6 @@
 var express = require('express'),
-mongoose = require('mongoose'),
-path = require('path');
-bodyParser = require('body-parser'),
-subtract = require('./lib/subtract'),
+// subtract = require('./lib/subtract'),
 app = express();
-var port = 3000;
-//const passport = require('passport');
-
-
-//db connection
-const config = require('./config/database');
-mongoose.connect(config.database);
-mongoose.connection.on('connected',function(req,res){
-  console.log('connected to mongodn'+config.database);
-});
-
-//bodyparser middleware
-//used to parse req body
-app.use(bodyParser.json());
-
-//passport middleware. Used for authentication
-//app.use(passport.initialize());
-//app.use(passport.session());
-
-//require('./config/passport')(passport);
-
-//routes to users
-const users = require('./routes/users');
-app.use('/users',users);
-
-
-
-
-//static folder for client
-app.use(express.static(path.join(__dirname, 'public')));
-//create a folder public
-
 
 app.use(function(req, res, next){
   var a = parseInt(req.query.a),
@@ -50,7 +15,7 @@ app.use(function(req, res, next){
 app.get('/add', require('./routes/add'));
 app.get('/subtract', require('./routes/subtract'));
 
-app.listen(port, function(){
+app.listen(3000, function(){
   console.log('App is now listening');
 });
 module.exports = app;
