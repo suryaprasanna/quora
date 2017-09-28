@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test', {
-    useMongoClient: true,
-    /* other options */
-});
+var User = require('../model/user');
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-//   console.log('we are connected!');
-});
+module.exports.addUser = function(newUser, callback){
+    newUser.save(callback);
+}
+
+module.exports.getUserbyname = function(username,callback){
+    const query = {username: username}
+    User.findOne(query,callback);
+}

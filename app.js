@@ -1,19 +1,23 @@
 var express = require('express'),
-// subtract = require('./lib/subtract'),
 app = express();
+var mongoose = require('mongoose');
+const config = require('./config/database');
 
-app.use(function(req, res, next){
-  var a = parseInt(req.query.a),
-  b = parseInt(req.query.b);
-  if (!a || !b || isNaN(a) || isNaN(b)){
-    return res.status(422).end("You must specify two numbers as query params, A and B");
-  }
-  req.a = a;
-  req.b = b;
-  return next();
+// Connect to mongoDB
+mongoose.connect(config.database, { useMongoClient: true });
+mongoose.connection.on('connected', function(req,res) {
+  console.log('connected to mongodb ' + config.database);
 });
-app.get('/add', require('./routes/add'));
-app.get('/subtract', require('./routes/subtract'));
+
+
+const userController = require('./controller/user_controller');
+
+const bp = require('body-parser');
+app.use(bp.json());
+
+// All the /users are routed to userController.
+app.use('/users', userController);
+
 
 app.listen(3000, function(){
   console.log('App is now listening');

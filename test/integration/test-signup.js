@@ -7,10 +7,3 @@
 //   .expect(200)
 //   .end(done);
 // };
-
-// exports.addition_should_reject_strings = function(done){
-//   supertest(app)
-//   .get('/add?a=string&b=2')
-//   .expect(422)
-//   .end(done);
-// };
