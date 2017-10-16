@@ -3,11 +3,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // create a schema
-var questionsSchema = new Schema({
-  id: {type : Number, required: true},
+var questionSchema = new Schema({
+  id: {type : Number},
   question: {type: String, required: true},
-  answer: { type: String},
-  user: { type: String, required: true, unique: true },
+  user: { type: String},
   category_id: {type : Number},
   date: {type:String}
 });
