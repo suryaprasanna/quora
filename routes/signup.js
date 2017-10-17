@@ -2,8 +2,6 @@ var UserUtil = require('../data/users');
 var User = require('../model/user');
 
 module.exports.postUser = function(req, res){
-    console.log("hello");
-    console.log(req.body.name);
     let newUser = new User({
         name: req.body.name,
         email: req.body.email,

@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "node_modules\\.bin\\mocha -u exports test\\*\\*"
+    "test": "node_modules\\.bin\\mocha -u exports test\\*\\*",
+    "start": "node app"
   },
   "author": "",
   "license": "ISC",
@@ -14,8 +15,11 @@
     "mongoose": "^4.11.13"
   },
   "devDependencies": {
+    "body-parser": "*",
     "mocha": "^3.5.3",
     "supertest": "^3.0.0",
-    "body-parser": "*"
+    "bcryptjs": "*",
+    "passport-jwt":"*",
+    "jsonwebtoken":"*"
   }
 }
