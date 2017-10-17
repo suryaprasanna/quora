@@ -7,7 +7,9 @@ const chai = require('chai');
 const expect = chai.expect;
 // Create a new schema that accepts a 'name' object.
 const User = require('../../model/user');
+const Ques = require('../../model/question');
 const UserUtil = require('../../data/users');
+const QuesUtil = require('../../data/questions');
 //Create a new collection called 'Name'
 describe('Database Tests', function() {
   //Before starting the test, create a sandboxed database connection
@@ -82,6 +84,30 @@ describe('Database Tests', function() {
         done();
       });
     });
+
+    it('New question saved to test database', function(done){
+      var ques = Ques({
+        question: 'Is question api working?'
+      }); 
+      QuesUtil.askQuestion(ques, done);
+    }); 
+
+    it('Should retrieve question details from test database', function(done) {
+      //Look up the 'ques' object previously saved.
+      Ques.findOne({question: 'Is question api working?'}, (err, ques) => {
+        if(err) {throw err;}
+        if(ques.length === 0) {throw new Error('No data!');}
+        done();
+      });
+    });
+
+    it('Should retrieve list of all questions from test database', function(done) {
+      QuesUtil.getQuestions(err => {
+        if(err) { throw new Error('Should generate error!'); }
+        done();
+      });
+    });
+
   });
   //After all tests are finished drop database and close connection
   after(function(done){
