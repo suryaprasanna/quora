@@ -6,7 +6,6 @@ module.exports.askQuestion = function(newQuestion, callback){
 }
 
 module.exports.getQuestions = function(callback){
-    console.log("TESTING");
     const query = ({},{question: 1 });
     question.find({},{question: 1 }, callback);
 }

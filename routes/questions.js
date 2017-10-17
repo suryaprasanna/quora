@@ -2,8 +2,6 @@ var questionUtil = require('../data/questions');
 var question = require('../model/question');
 
 module.exports.getQuestions = function(req, res){
-    console.log("test1");
-    
     questionUtil.getQuestions(function(err, ques) {
         if (err) {
             console.log("Not able to get questions from db.");

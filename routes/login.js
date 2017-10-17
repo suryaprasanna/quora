@@ -4,8 +4,6 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
 module.exports.authenticate = function(req, res){
-    console.log("hello");
-    console.log(req.body.name);
     
     const username = req.body.username;
     const password = req.body.password;
