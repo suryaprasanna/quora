@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "node_modules\\.bin\\mocha -u exports test\\*\\*",
+    "test": "node_modules/.bin/mocha -u exports test/*",
     "start": "node app"
   },
   "author": "",
@@ -12,14 +12,16 @@
   "dependencies": {
     "chai": "^4.1.2",
     "mocha": "^3.5.3",
-    "mongoose": "^4.11.13"
+    "mongoose": "^4.11.13",
+    "elasticsearch": "*"
   },
   "devDependencies": {
-    "body-parser": "*",
-    "mocha": "^3.5.3",
-    "supertest": "^3.0.0",
     "bcryptjs": "*",
-    "passport-jwt":"*",
-    "jsonwebtoken":"*"
+    "body-parser": "*",
+    "chai": "^4.1.2",
+    "jsonwebtoken": "*",
+    "mocha": "^3.5.3",
+    "passport-jwt": "*",
+    "supertest": "^3.0.0"
   }
 }
