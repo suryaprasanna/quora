@@ -8,6 +8,8 @@ var questionAnswerSchema = new Schema({
   q_id : {type: String},
   // user: { type: String},
   a_id: {type: String},
+  question: {type: String},
+  answer : {type: String},
   // is_anonymous : {type: Boolean},
   // category_id: {type : Number},
   created_on: {type: Date},
