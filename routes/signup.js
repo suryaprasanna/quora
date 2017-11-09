@@ -1,5 +1,6 @@
 var UserUtil = require('../data/users');
 var User = require('../model/user');
+const jwt = require('jsonwebtoken');
 
 module.exports.postUser = function(req, res){
     let newUser = new User({
@@ -13,6 +14,17 @@ module.exports.postUser = function(req, res){
             console.log("Not able to add user to db.");
             res.json({success: false, msg: 'Failed to add user'});
         } else {
+            const token = "token"; 
+            res.json({
+              success: true,
+              token: token,
+              user: {
+                id: user._id,
+                name: user.name,
+                username: user.username,
+                email: user.email
+              }
+            });
             res.json({success: true, msg: 'Successfully added user name' + user.name});
         }
     });
