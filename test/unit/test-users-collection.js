@@ -91,7 +91,7 @@ describe('Database Tests', function() {
         });
       });
       
-    it('Test findall method in users', function(done) {
+    it('Test find all method in users', function(done) {
       //Look up the 'Mike' object previously saved.
       User.find({}, (err, user) => {
         if(err) {throw err;}
@@ -118,6 +118,42 @@ describe('Database Tests', function() {
         name: 'When did the great war start?'
       }); 
       QuesUtil.askQuestion(q1,'When did the great war start?',done);
+    });
+
+    it('Check for question in database', function(done){
+      var q1 = Ques({
+        user_id: '12',
+        is_anonymous: 'true',
+        name: 'When did the great war start?'
+      }); 
+      QuesUtil.askQuestion(q1,'When did the great war start?',function(err,resp){
+        var id = resp.id;
+        Ques.findById(id, (err, ques) => {
+          //console.log("QUESTION OBJ is: "+ques);
+          //check for null ans object!!!!!!
+          if(err) {throw err;}
+          if(ques==null || ques.length === 0) {throw new Error('No data!');}
+          done();
+        });
+      });
+    });
+
+    it('Check for question mapping in question_users schema', function(done){
+      var q1 = Ques({
+        user_id: '12',
+        is_anonymous: 'true',
+        name: 'When did the great war start?'
+      }); 
+      QuesUtil.askQuestion(q1,'When did the great war start?',function(err,resp){
+        var id = resp.id;
+        Ques_user.findOne({q_id:id}, (err, ques) => {
+          //console.log("QUESTION OBJ is: "+ques);
+          //check for null ans object!!!!!!
+          if(err) {throw err;}
+          if(ques==null || ques.length === 0) {throw new Error('No data!');}
+          done();
+        });
+      });
     });
 
     it('Edit a question', function(done){
@@ -156,6 +192,52 @@ describe('Database Tests', function() {
       AnsUtil.putAnswer(ans,question_id,name,err => {
         if(err) {throw new Error('Should generate error!'); }
         done();
+      });
+    });
+
+    it('Check for Answer in database', function(done){
+      var ans = Ans({
+        user_id: '11',
+        is_anonymous: 'true',
+        votes: '0',
+        created_on: new Date(),
+        updated_on: new Date()
+      });
+      var question_id = "12";
+      var name = "Great war was started on 1914.";
+
+      AnsUtil.putAnswer(ans,question_id,name,function(err,resp){
+        var id = resp.id;
+        Ans.findById(id, (err, ans) => {
+          console.log("ANSWER OBJ is: "+ans);
+          //check for null ans object!!!!!!
+          if(err) {throw err;}
+          if(ans==null || ans.length === 0) {throw new Error('No data!');}
+          done();
+        });
+      });
+    });
+
+    it('Check for Answer mapping in queston_answers database', function(done){
+      var ans = Ans({
+        user_id: '11',
+        is_anonymous: 'true',
+        votes: '0',
+        created_on: new Date(),
+        updated_on: new Date()
+      });
+      var question_id = "12";
+      var name = "Great war was started on 1914.";
+
+      AnsUtil.putAnswer(ans,question_id,name,function(err,resp){
+        var id = resp.id;
+        Ques_ans.findOne({a_id: id}, (err, ans) => {
+          //console.log("QUESTION_ANSWER OBJ is: "+ans);
+          //check for null ans object!!!!!!
+          if(err) {throw err;}
+          if(ans==null || ans.length === 0) {throw new Error('No data!');}
+          done();
+        });
       });
     });
 
