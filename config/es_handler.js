@@ -2,6 +2,24 @@ var client = require('./es_connection.js');
 
 
 module.exports = {
+
+  search: function (index, type, value) {
+    var promise = new Promise(function (resolve, reject) {
+      resolve(client.search({
+          index: index,
+          type: type,
+          body : {
+            query : {
+              match: {
+                name : value
+              }
+            }
+          }
+        }));
+    });
+    return promise;
+  },
+
   createIndex:  function (index) {
 
     var promise = new Promise(function (resolve, reject) {
