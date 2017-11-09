@@ -35,6 +35,7 @@ module.exports = {
 				let qu = new questionUser();
 				qu.user_id = q.user_id;
 				qu.q_id = q._id;
+				qu.question = q.question;
 				resolve(qu.save());
 			});
 			return promise;
