@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var User = require('../model/user');
-const bcrypt = require('bcryptjs');
+var bcrypt = require('bcryptjs');
 
 //module.exports.addUser = function(newUser, callback){
 //    newUser.save(callback);
