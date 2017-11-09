@@ -3,12 +3,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // create a schema
-var questionSchema = new Schema({
+var voteSchema = new Schema({
   id: {type : Number},
-  e_id : {type: String},
+  type : {type: Number},
   user_id: { type: String},
-  votes: {type: Number},
-  is_anonymous : {type: Boolean},
+  type_id: {type: String},
+  value : {type: Number},
+  // is_anonymous : {type: Boolean},
   // category_id: {type : Number},
   created_on: {type: Date},
   updated_on: {type: Date, default: Date.now}
@@ -16,7 +17,8 @@ var questionSchema = new Schema({
 
 // the schema is useless so far
 // we need to create a model using it
-var question = mongoose.model('question', questionSchema);
+// voteSchema.index({ type: 1, user_id: 1, type_id: 1 }, { unique: true });
 
+var vote = mongoose.model('vote', voteSchema);
 // make this available to our users in our Node applications
-module.exports = question;
+module.exports = vote;
