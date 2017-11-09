@@ -10,7 +10,7 @@ module.exports = {
 		c = es_client.search(index, type, value)//, "helloworld", "hello")
 				.then((data) => {
 					var d = data.hits.hits;
-					console.log(d);
+					//console.log(d);
 					var len = d.length;
 					var resbody = [];
 					for (var i = 0; i < len; i++) {
@@ -21,11 +21,11 @@ module.exports = {
 					    question: o._source.name
 					  })
 					}
-					console.log(resbody);
+					//console.log(resbody);
 					resp.json({sucess: true, body: resbody});
 				})
 				.catch(function (err) {
-					console.log("error ", err);
+					//console.log("error ", err);
 					resp.json({sucess: false, msg: err});
 				});
 	}

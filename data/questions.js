@@ -25,11 +25,11 @@ module.exports = {
 
 		var createQuestionUserEntry = function(data) {
 			var promise = new Promise((resolve, reject) => {
-				console.log("d1 " + data);
+				//console.log("d1 " + data);
 				// var q1 = data.q;
 				// console.log("es " + data.esObj._id);
-				console.log("q " + q._id);
-				console.log("eq " + q.e_id);
+				//console.log("q " + q._id);
+				//console.log("eq " + q.e_id);
 				// console.log("q " + q._id);
 
 				let qu = new questionUser();
@@ -68,7 +68,7 @@ module.exports = {
 				callback(false, body);
 			})
 			.catch(function(err) {
-				console.log(err);
+				//console.log(err);
 				callback(err, true);
 			});
 
