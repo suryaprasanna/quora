@@ -24,6 +24,7 @@ module.exports = {
         q1.user_id = req.body.user_id;
         q1.is_anonymous = req.body.is_anonymous;
         q1.votes = 0;
+        q1.question = req.body.name;
         q1.created_on = new Date();
         q1.updated_on = new Date();
 
