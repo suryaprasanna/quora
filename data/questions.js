@@ -32,7 +32,7 @@ module.exports = {
 				//console.log("eq " + q.e_id);
 				// console.log("q " + q._id);
 
-				let qu = new questionUser();
+				var qu = new questionUser();
 				qu.user_id = q.user_id;
 				qu.q_id = q._id;
 				qu.question = q.question;

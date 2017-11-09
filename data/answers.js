@@ -24,7 +24,7 @@ module.exports = {
 				//console.log("ans " + ans._id);
 				//console.log("eans " + ans.e_id);
 
-				let au = new answerUser();
+				var au = new answerUser();
 				au.user_id = ans.user_id;
 				au.a_id = ans._id;
 				au.answer = ans.answer;
@@ -44,7 +44,7 @@ module.exports = {
 
 		var createQuestionAnswerEntry = function(data) {
 			var promise = new Promise((resolve, reject) => {
-				let qa = new questionAnswer();
+				var qa = new questionAnswer();
 				qa.q_id = q._id;
 				qa.a_id = ans._id;
 				qa.answer = ans.answer;

@@ -3,7 +3,7 @@ var User = require('../model/user');
 var jwt = require('jsonwebtoken');
 
 module.exports.postUser = function(req, res){
-    let newUser = new User({
+    var newUser = new User({
         name: req.body.name,
         email: req.body.email,
         username: req.body.username,
