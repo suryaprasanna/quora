@@ -11,7 +11,7 @@ module.exports.postUser = function(req, res){
     });
     UserUtil.addUser(newUser, function(err, user) {
         if (err) {
-            console.log("Not able to add user to db.");
+            //console.log("Not able to add user to db.");
             res.json({success: false, msg: 'Failed to add user'});
         } else {
             const token = "token"; 
