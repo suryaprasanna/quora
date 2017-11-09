@@ -46,3 +46,7 @@ Once the the installation is done, please clone the repository and inside the ro
 node app.js
 ```
 
+
+
+//npm install --save bluebird
+npm install promise
