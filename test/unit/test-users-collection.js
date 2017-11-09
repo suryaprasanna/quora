@@ -2,26 +2,26 @@
 // NPM install mongoose and chai. Make sure mocha is globally
 // installed
 var mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const chai = require('chai');
-const expect = chai.expect;
+var Schema = mongoose.Schema;
+var chai = require('chai');
+var expect = chai.expect;
 // Create a new schema that accepts a 'name' object.
-const User = require('../../model/user');
-const Ques = require('../../model/question');
-const Ques_user = require('../../model/question_user');
-const Ques_ans = require('../../model/question_answer');
-const Ans = require('../../model/answer');
-const Ans_user = require('../../model/answer_user');
-const UserUtil = require('../../data/users');
-const QuesUtil = require('../../data/questions');
-const AnsUtil = require('../../data/answers');
+var User = require('../../model/user');
+var Ques = require('../../model/question');
+var Ques_user = require('../../model/question_user');
+var Ques_ans = require('../../model/question_answer');
+var Ans = require('../../model/answer');
+var Ans_user = require('../../model/answer_user');
+var UserUtil = require('../../data/users');
+var QuesUtil = require('../../data/questions');
+var AnsUtil = require('../../data/answers');
 //Create a new collection called 'Name'
 describe('Database Tests', function() {
   //Before starting the test, create a sandboxed database connection
   //Once a connection is established invoke done()
   before(function (done) {
     mongoose.connect('mongodb://localhost:27017/testDatabase', { useMongoClient: true });
-    const db = mongoose.connection;
+    var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error'));
     db.once('open', function() {
     //   console.log('We are connected to test database!');
