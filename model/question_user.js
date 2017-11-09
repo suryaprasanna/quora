@@ -3,12 +3,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // create a schema
-var questionSchema = new Schema({
+var questionUserSchema = new Schema({
   id: {type : Number},
-  e_id : {type: String},
-  user_id: { type: String},
-  votes: {type: Number},
-  is_anonymous : {type: Boolean},
+  q_id : {type: String},
+  // user: { type: String},
+  user_id: {type: String},
+  // is_anonymous : {type: Boolean},
   // category_id: {type : Number},
   created_on: {type: Date},
   updated_on: {type: Date, default: Date.now}
@@ -16,7 +16,7 @@ var questionSchema = new Schema({
 
 // the schema is useless so far
 // we need to create a model using it
-var question = mongoose.model('question', questionSchema);
+var questionUser = mongoose.model('question_user', questionUserSchema);
 
 // make this available to our users in our Node applications
-module.exports = question;
+module.exports = questionUser;
