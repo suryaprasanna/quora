@@ -164,7 +164,7 @@ describe('Database Tests', function() {
         name: 'When did the great war start?'
       }); 
       QuesUtil.askQuestion(q1,'When did the great war start?',function(err,resp){
-        console.log("RESP IS; "+JSON.stringify(resp));
+        //console.log("RESP IS; "+JSON.stringify(resp));
         var id = resp.id;
         var name = "When did the world war 1 started?";
         var user_id = resp.user_id;
@@ -209,7 +209,7 @@ describe('Database Tests', function() {
       AnsUtil.putAnswer(ans,question_id,name,function(err,resp){
         var id = resp.id;
         Ans.findById(id, (err, ans) => {
-          console.log("ANSWER OBJ is: "+ans);
+          //console.log("ANSWER OBJ is: "+ans);
           //check for null ans object!!!!!!
           if(err) {throw err;}
           if(ans==null || ans.length === 0) {throw new Error('No data!');}
