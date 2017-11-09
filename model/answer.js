@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 // create a schema
 var answerSchema = new Schema({
   id: {type : Number},
+  answer : {type: String},
   e_id : {type: String},
   user_id: { type: String},
   votes: {type: Number},

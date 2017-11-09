@@ -2,23 +2,25 @@ var answerUtil = require('../data/answers');
 var answer = require('../model/answer');
 
 module.exports = {
-    // getAnswers : function(req, res){
-    //     questionUtil.getQuestions(function(err, ques) {
-    //         if (err) {
-    //             console.log("Not able to get questions from db.");
-    //             res.json({success: false, msg: 'Failed to get list of questions'});
-    //         } else {
-    //             console.log(ques);
-    //             console.log("in else");
-    //             res.json(ques);
-    //         }
-    //     });
-    // },
+    getAnswers : function(req, res){
+        
+        questionUtil.getQuestions(function(err, ques) {
+            if (err) {
+                console.log("Not able to get questions from db.");
+                res.json({success: false, msg: 'Failed to get list of questions'});
+            } else {
+                console.log(ques);
+                console.log("in else");
+                res.json(ques);
+            }
+        });
+    },
 
     putAnswer : function(req, res) {
         console.log("aq " + req);
         let a1 = new answer();
         a1.user_id = req.body.user_id;
+        a1.answer = req.body.name;
         a1.is_anonymous = req.body.is_anonymous;
         a1.votes = 0;
         a1.created_on = new Date();
