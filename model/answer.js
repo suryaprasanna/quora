@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // create a schema
-var questionSchema = new Schema({
+var answerSchema = new Schema({
   id: {type : Number},
   e_id : {type: String},
   user_id: { type: String},
@@ -16,7 +16,7 @@ var questionSchema = new Schema({
 
 // the schema is useless so far
 // we need to create a model using it
-var question = mongoose.model('question', questionSchema);
+var answer = mongoose.model('answer', answerSchema);
 
 // make this available to our users in our Node applications
-module.exports = question;
+module.exports = answer;
