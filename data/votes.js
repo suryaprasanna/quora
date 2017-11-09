@@ -10,7 +10,7 @@ var voteHelper = require('./votes_helper');
 var Promises = require('promise');
 
 var getEntry = function(type, user_id, type_id) {
-	var promise = new Promise((resolve, reject) => {
+	var promise = new Promise(function(resolve, reject){
 		resolve(vote.findOne({type: type, user_id : user_id, type_id : type_id}));
 	});
 	return promise;
@@ -44,10 +44,10 @@ module.exports = {
 
 		getEntry(type, user_id, type_id)
 			.then(insertVote)
-			.then((d) => {
+			.then(function(d){
 				console.log("in oout");
 				callback(false, "upvoted");
-			}, (err) => callback(err, body))
+			}, function (err) { callback(err, body)})
 			.catch(function (err) {
 				console.log("inside catch clause " + err);
 				callback(err, "already upvoted");
