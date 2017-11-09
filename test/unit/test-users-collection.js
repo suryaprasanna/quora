@@ -46,7 +46,7 @@ describe('Database Tests', function() {
 
     it('Should authenticate the above added user', function(done){
       UserUtil.getUserbyname('mika', function(err, user){
-        UserUtil.comparePassword('mikamike', user.password,err => {
+        UserUtil.comparePassword('mikamike', user.password,function (err) {
           if(err) { throw new Error('Should generate error!'); }
           done();
         });
@@ -56,7 +56,7 @@ describe('Database Tests', function() {
 
     it('Should retrieve user details from test database', function(done) {
         //Look up the 'Mike' object previously saved.
-        User.findOne({name: 'Mike'}, (err, user) => {
+        User.findOne({name: 'Mike'}, function (err, user)  {
           if(err) {throw err;}
           if(user.length === 0) {throw new Error('No data!');}
           done();
@@ -71,7 +71,7 @@ describe('Database Tests', function() {
         email: 'mika1@ufl.edu',
         password: 'mikamike1'
       });
-      UserUtil.addUser(wrongSave, err => {
+      UserUtil.addUser(wrongSave, function (err) {
         if(err) { return done(); }
         throw new Error('Should generate error!');
       });
@@ -85,7 +85,7 @@ describe('Database Tests', function() {
           email: 'mika@ufl.edu',
           password: 'mikamike1'
         });
-        UserUtil.addUser(wrongSave, err => {
+        UserUtil.addUser(wrongSave, function (err) {
           if(err) { return done(); }
           throw new Error('Should generate error!');
         });
@@ -93,7 +93,7 @@ describe('Database Tests', function() {
       
     it('Test find all method in users', function(done) {
       //Look up the 'Mike' object previously saved.
-      User.find({}, (err, user) => {
+      User.find({}, function (err, user) {
         if(err) {throw err;}
         if(user.length === 0) {throw new Error('No data!');}
         // console.log(user.email);
@@ -128,7 +128,7 @@ describe('Database Tests', function() {
       }); 
       QuesUtil.askQuestion(q1,'When did the great war start?',function(err,resp){
         var id = resp.id;
-        Ques.findById(id, (err, ques) => {
+        Ques.findById(id, function (err, ques) {
           //console.log("QUESTION OBJ is: "+ques);
           //check for null ans object!!!!!!
           if(err) {throw err;}
@@ -146,7 +146,7 @@ describe('Database Tests', function() {
       }); 
       QuesUtil.askQuestion(q1,'When did the great war start?',function(err,resp){
         var id = resp.id;
-        Ques_user.findOne({q_id:id}, (err, ques) => {
+        Ques_user.findOne({q_id:id}, function (err, ques) {
           //console.log("QUESTION OBJ is: "+ques);
           //check for null ans object!!!!!!
           if(err) {throw err;}
@@ -170,7 +170,7 @@ describe('Database Tests', function() {
         var user_id = resp.user_id;
         QuesUtil.getQuestion(id, function(err, ques){
           if(ques.user_id != user_id) { throw new Error('Should generate error!');}
-          QuesUtil.editQuestion(ques.e_id, name,err => {
+          QuesUtil.editQuestion(ques.e_id, name, function (err) {
             if(err) { throw new Error('Should generate error!'); }
             done(); 
           });
@@ -189,7 +189,7 @@ describe('Database Tests', function() {
       });
       var question_id = "12";
       var name = "Great war was started on 1914.";
-      AnsUtil.putAnswer(ans,question_id,name,err => {
+      AnsUtil.putAnswer(ans,question_id,name, function (err) {
         if(err) {throw new Error('Should generate error!'); }
         done();
       });
@@ -208,7 +208,7 @@ describe('Database Tests', function() {
 
       AnsUtil.putAnswer(ans,question_id,name,function(err,resp){
         var id = resp.id;
-        Ans.findById(id, (err, ans) => {
+        Ans.findById(id, function (err, ans) {
           //console.log("ANSWER OBJ is: "+ans);
           //check for null ans object!!!!!!
           if(err) {throw err;}
@@ -231,7 +231,7 @@ describe('Database Tests', function() {
 
       AnsUtil.putAnswer(ans,question_id,name,function(err,resp){
         var id = resp.id;
-        Ques_ans.findOne({a_id: id}, (err, ans) => {
+        Ques_ans.findOne({a_id: id}, function (err, ans) {
           //console.log("QUESTION_ANSWER OBJ is: "+ans);
           //check for null ans object!!!!!!
           if(err) {throw err;}
@@ -258,7 +258,7 @@ describe('Database Tests', function() {
         var answer = "Great war was started on July 28th, 1914.";
         AnsUtil.getAnswer(id, function(err, a){
           if(a.user_id != user_id) { throw new Error('Should generate error!');}
-          AnsUtil.editAnswer(a.e_id, answer,err => {
+          AnsUtil.editAnswer(a.e_id, answer,function (err) {
             if(err) { throw new Error('Should generate error!'); }
             done(); 
           });
