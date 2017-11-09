@@ -12,10 +12,10 @@ module.exports = {
                 for (var i in data) {
                     var o = data[i];
                     if (!(o.q_id in r1)) {
-                        console.log("in isde " + o.q_id);
+                        //console.log("in isde " + o.q_id);
                         r1[o.q_id] = {question : o.question};
                     } else {
-                        console.log("here");
+                        //console.log("here");
                     }
                 }
                 for (var i in data) {
@@ -30,13 +30,13 @@ module.exports = {
                 res.json({r1 : r1});
             })
             .catch((err) => {
-                console.log("error occured in geting question " , err);
+                //console.log("error occured in geting question " , err);
                 res.json({"success" : false, msg : "error occured in getting quesitons."});
             })
     },
 
     askQuestion : function(req, res) {
-        console.log("aq " + req);        
+        //console.log("aq " + req);        
 
         let q1 = new question();
         q1.user_id = req.body.user_id;
@@ -48,10 +48,10 @@ module.exports = {
 
         questionUtil.askQuestion(q1, req.body.name, function(err, resp){
             if (err) {
-                console.log("Not able to get questions from db.");
+                //console.log("Not able to get questions from db.");
                 res.json({success: false, msg: 'Failed to save question to db'});
             } else {
-                console.log("hi resp " + resp);
+                //console.log("hi resp " + resp);
                 res.json({success: true, body: resp, msg: 'Successfully saved question to db'});
             }
         });

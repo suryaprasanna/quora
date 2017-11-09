@@ -21,8 +21,8 @@ module.exports = {
 				// console.log("d1 " + data);
 				// var q1 = data.q;
 				// console.log("es " + data.esObj._id);
-				console.log("ans " + ans._id);
-				console.log("eans " + ans.e_id);
+				//console.log("ans " + ans._id);
+				//console.log("eans " + ans.e_id);
 
 				let au = new answerUser();
 				au.user_id = ans.user_id;
@@ -35,7 +35,7 @@ module.exports = {
 		
 		var createAnswer = function(data) {
 			var promise = new Promise((resolve, reject) => {
-				console.log("ans : " + ans.user_id);
+				//console.log("ans : " + ans.user_id);
 				ans.e_id = data._id;
 				resolve(ans.save());
 			});
@@ -75,7 +75,7 @@ module.exports = {
 				callback(false, body);
 			})
 			.catch(function(err) {
-				console.log(err);
+				//console.log(err);
 				callback(err, true);
 			});
 
