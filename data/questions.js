@@ -7,11 +7,19 @@ var Promises = require('promise');
 
 var questionUserUtil = require('../data/question_users');
 var questionUser = require('../model/question_user');
+var questionAnswer = require('../model/question_answer');
 
 var index = "quora";
 var type = "questions";
 
 module.exports = {
+
+	getQuestions : function() {
+		var promise = new Promise((resolve, reject) => {
+			resolve(questionAnswer.find({}));
+		});
+		return promise;
+	},
 
 	askQuestion : function(q, name, callback){
 

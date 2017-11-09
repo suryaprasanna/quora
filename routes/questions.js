@@ -5,16 +5,34 @@ var voteUtil = require('../data/votes');
 
 module.exports = {
     getQuestions : function(req, res){
-        // questionUtil.getQuestions(function(err, ques) {
-        //     if (err) {
-        //         console.log("Not able to get questions from db.");
-        //         res.json({success: false, msg: 'Failed to get list of questions'});
-        //     } else {
-        //         console.log(ques);
-        //         console.log("in else");
-        //         res.json(ques);
-        //     }
-        // });
+
+        questionUtil.getQuestions()
+            .then((data) => {
+                var r1 = {};
+                for (var i in data) {
+                    var o = data[i];
+                    if (!(o.q_id in r1)) {
+                        console.log("in isde " + o.q_id);
+                        r1[o.q_id] = {question : o.question};
+                    } else {
+                        console.log("here");
+                    }
+                }
+                for (var i in data) {
+                    var o = data[i];
+                    var obj = r1[o.q_id];
+                    if (!("answers" in obj)) {
+                        obj["answers"] = [];
+                    }
+                    var answer = {"id" : o.a_id, "answer" : o.answer};
+                    obj["answers"].push(answer);
+                }
+                res.json({r1 : r1});
+            })
+            .catch((err) => {
+                console.log("error occured in geting question " , err);
+                res.json({"success" : false, msg : "error occured in getting quesitons."});
+            })
     },
 
     askQuestion : function(req, res) {
