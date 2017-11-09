@@ -39,6 +39,16 @@ describe('Database Tests', function() {
       UserUtil.addUser(testName, done);
     });
 
+    it('Should authenticate the above added user', function(done){
+      UserUtil.getUserbyname('mika', function(err, user){
+        UserUtil.comparePassword('mikamike', user.password,err => {
+          if(err) { throw new Error('Should generate error!'); }
+          done();
+        });
+      });
+      
+    });
+
     it('Should retrieve user details from test database', function(done) {
         //Look up the 'Mike' object previously saved.
         User.findOne({name: 'Mike'}, (err, user) => {
@@ -61,6 +71,7 @@ describe('Database Tests', function() {
         throw new Error('Should generate error!');
       });
     });
+    
     it('Check unique key constraint on email', function(done) {
         //Attempt to save with wrong info. An error should trigger
         var wrongSave = User({
