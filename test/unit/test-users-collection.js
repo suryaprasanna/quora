@@ -1,7 +1,7 @@
 "use strict";
 // NPM install mongoose and chai. Make sure mocha is globally
 // installed
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const chai = require('chai');
 const expect = chai.expect;
