@@ -1,0 +1,28 @@
+{
+  "name": "quora",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha -u exports test/*",
+    "start": "node app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "chai": "^4.1.2",
+    "elasticsearch": "*",
+    "mocha": "^3.5.3",
+    "mongoose": "^4.11.13"
+  },
+  "devDependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "chai": "^4.1.2",
+    "jsonwebtoken": "*",
+    "mocha": "^3.5.3",
+    "passport-jwt": "*",
+    "supertest": "^3.0.0"
+  }
+}
