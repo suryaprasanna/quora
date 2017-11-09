@@ -8,13 +8,14 @@ var Promises = require('promise');
 var answerUser = require('../model/answer_user');
 var questionAnswer = require('../model/question_answer');
 
+var question = require('../model/question');
+
 var index = "quora";
 var type = "answers";
 
 module.exports = {
 
-	putAnswer : function(ans, qid, name, callback){
-
+	putAnswer : function(ans, q, name, callback){
 		var createAnswerUserEntry = function(data) {
 			var promise = new Promise((resolve, reject) => {
 				// console.log("d1 " + data);
@@ -22,11 +23,11 @@ module.exports = {
 				// console.log("es " + data.esObj._id);
 				console.log("ans " + ans._id);
 				console.log("eans " + ans.e_id);
-				// console.log("q " + q._id);
 
 				let au = new answerUser();
 				au.user_id = ans.user_id;
 				au.a_id = ans._id;
+				au.answer = ans.answer;
 				resolve(au.save());
 			});
 			return promise;
@@ -44,8 +45,11 @@ module.exports = {
 		var createQuestionAnswerEntry = function(data) {
 			var promise = new Promise((resolve, reject) => {
 				let qa = new questionAnswer();
-				qa.q_id = qid;
+				qa.q_id = q._id;
 				qa.a_id = ans._id;
+				qa.answer = ans.answer;
+				qa.question = q.question;
+				
 				resolve(qa.save());
 			});
 			return promise;

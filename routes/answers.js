@@ -1,5 +1,7 @@
 var answerUtil = require('../data/answers');
 var answer = require('../model/answer');
+var question = require('../model/question');
+var questionUtil = require('../data/questions');
 
 module.exports = {
     getAnswers : function(req, res){
@@ -26,15 +28,21 @@ module.exports = {
         a1.created_on = new Date();
         a1.updated_on = new Date();
 
-        answerUtil.putAnswer(a1, req.body.question_id, req.body.name, function(err, resp){
-            if (err) {
-                console.log("Not able to get questions from db.");
+        questionUtil.getQuestion(req.body.question_id)
+            .then((q) => {
+                answerUtil.putAnswer(a1, q, req.body.name, function(err, resp){
+                    if (err) {
+                        console.log("Not able to get questions from db.");
+                        res.json({success: false, msg: 'Failed to save answer to db'});
+                    } else {
+                        console.log("hi resp " + resp);
+                        res.json({success: true, body: resp, msg: 'Successfully saved answer to db'});
+                    }
+                });
+            })
+            .catch( function (err) {
                 res.json({success: false, msg: 'Failed to save answer to db'});
-            } else {
-                console.log("hi resp " + resp);
-                res.json({success: true, body: resp, msg: 'Successfully saved answer to db'});
-            }
-        });
+            });
     },
 
     editAnswer : function(req, resp) {
