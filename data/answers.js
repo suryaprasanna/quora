@@ -17,7 +17,7 @@ module.exports = {
 
 	putAnswer : function(ans, q, name, callback){
 		var createAnswerUserEntry = function(data) {
-			var promise = new Promise((resolve, reject) => {
+			var promise = new Promise(function (resolve, reject) {
 				// console.log("d1 " + data);
 				// var q1 = data.q;
 				// console.log("es " + data.esObj._id);
@@ -34,7 +34,7 @@ module.exports = {
 		};
 		
 		var createAnswer = function(data) {
-			var promise = new Promise((resolve, reject) => {
+			var promise = new Promise(function (resolve, reject) {
 				//console.log("ans : " + ans.user_id);
 				ans.e_id = data._id;
 				resolve(ans.save());
@@ -43,7 +43,7 @@ module.exports = {
 		};
 
 		var createQuestionAnswerEntry = function(data) {
-			var promise = new Promise((resolve, reject) => {
+			var promise = new Promise(function (resolve, reject){
 				var qa = new questionAnswer();
 				qa.q_id = q._id;
 				qa.a_id = ans._id;
@@ -118,7 +118,7 @@ module.exports = {
 
 	getAnswer : function(id){
 		
-		var promise = new Promise((resolve, reject) => {
+		var promise = new Promise(function (resolve, reject) {
 			resolve(answer.findById(id));
 		});
 		return promise;
