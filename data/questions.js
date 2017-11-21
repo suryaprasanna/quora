@@ -5,9 +5,10 @@ var question = require('../model/question');
 var es_client = require('../config/es_handler.js');
 var Promises = require('promise');
 
-var questionUserUtil = require('../data/question_users');
-var questionUser = require('../model/question_user');
+// var questionUserUtil = require('../data/question_users');
+// var questionUser = require('../model/question_user');
 var questionAnswer = require('../model/question_answer');
+var activity = require('../model/activity');
 
 var index = "quora";
 var type = "questions";
@@ -22,6 +23,13 @@ module.exports = {
 	},
 
 	askQuestion : function(q, name, callback){
+
+		var createActivity = function(data) {
+			var promise = new Promise((resolve, reject) => {
+
+			});
+			return promise;
+		};
 
 		var createQuestionUserEntry = function(data) {
 			var promise = new Promise((resolve, reject) => {

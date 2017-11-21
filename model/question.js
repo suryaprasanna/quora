@@ -8,9 +8,12 @@ var questionSchema = new Schema({
   question : {type: String},
   e_id : {type: String},
   user_id: { type: String},
-  votes: {type: Number},
+  upvotes: {type: Number},
+  downvotes : {type: Number},
   is_anonymous : {type: Boolean},
-  // category_id: {type : Number},
+  topics : [Number],
+  answers : [Number],
+  comments : [Number],
   created_on: {type: Date},
   updated_on: {type: Date, default: Date.now}
 });
