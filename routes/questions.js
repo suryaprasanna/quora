@@ -67,7 +67,7 @@ module.exports = {
         questionUtil.getQuestion(id)
             .then((q) => {
                 if (q.user_id === user_id) {
-                    questionUtil.editQuestion(q.e_id, name)
+                    questionUtil.editQuestion(q, name)
                         .then((data) => {
                             resp.json({success: true, msg: "updated succesfully"});
                         })

@@ -16,6 +16,26 @@ var type = "answers";
 module.exports = {
 
 	putAnswer : function(ans, q, name, callback){
+
+		var promise = new Promise((resolve, reject) => {
+			resolve();
+		});
+		return promise;
+
+		var createAnswer = function(data) {
+			var promise = new Promise(function (resolve, reject) {
+				ans.e_id = data._id;
+				resolve(ans.save());
+			});
+			return promise;
+		};
+
+		var addAnswer = function(data) {
+
+		};
+
+
+
 		var createAnswerUserEntry = function(data) {
 			var promise = new Promise((resolve, reject) => {
 				// console.log("d1 " + data);

@@ -8,11 +8,14 @@ var questionSchema = new Schema({
   question : {type: String},
   e_id : {type: String},
   user_id: { type: String},
-  votes: {type: Number},
+  upvotes: {type: Number},
+  downvotes : {type: Number},
   is_anonymous : {type: Boolean},
-  // category_id: {type : Number},
-  created_on: {type: Date},
-  updated_on: {type: Date, default: Date.now}
+  topics : [{type: Schema.Types.ObjectId, ref: 'topic'}],
+  answers : [{type: Schema.Types.ObjectId, ref: 'answer'}],
+  comments : [{type: Schema.Types.ObjectId, ref: 'Ingredient'}],
+  created_on: {type: Date, default: Date.now},
+  updated_on: {type: Date}
 });
 
 // the schema is useless so far
