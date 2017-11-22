@@ -21,7 +21,7 @@ module.exports = {
 	askQuestion : function(q, name, callback){
 
 		var createQuestion = function(data) {
-			var promise = new Promise(function(resolve, reject){
+			var promise = new Promise((resolve, reject) => {
 				q.e_id = data._id;
 				resolve(q.save());
 			});

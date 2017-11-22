@@ -20,7 +20,7 @@ module.exports = {
 
     putAnswer : function(req, res) {
         console.log("aq " + req);
-        var a1 = new answer();
+        let a1 = new answer();
         a1.user_id = req.body.user_id;
         a1.answer = req.body.name;
         a1.is_anonymous = req.body.is_anonymous;
@@ -46,9 +46,9 @@ module.exports = {
     },
 
     editAnswer : function(req, resp) {
-        var id = req.body.id;
-        var answer = req.body.name;
-        var user_id = req.body.user_id;
+        let id = req.body.id;
+        let answer = req.body.name;
+        let user_id = req.body.user_id;
         console.log(id);
         answerUtil.getAnswer(id)
             .then((a) => {
