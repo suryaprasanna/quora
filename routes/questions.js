@@ -38,7 +38,7 @@ module.exports = {
     askQuestion : function(req, res) {
         //console.log("aq " + req);        
 
-        var q1 = new question();
+        let q1 = new question();
         q1.user_id = req.body.user_id;
         q1.is_anonymous = req.body.is_anonymous;
         q1.votes = 0;
@@ -58,9 +58,9 @@ module.exports = {
     },
 
     editQuestion : function(req, resp) {
-        var id = req.body.id;
-        var name = req.body.name;
-        var user_id = req.body.user_id;
+        let id = req.body.id;
+        let name = req.body.name;
+        let user_id = req.body.user_id;
         // console.log("id : " + id);
         // console.log("user_id : " + user_id);
         // console.log("name : " + name);
@@ -84,9 +84,9 @@ module.exports = {
     },
 
     upvote : function(req, resp) {
-        var type = 0;
-        var user_id = req.body.user_id;
-        var type_id = req.body.type_id;
+        let type = 0;
+        let user_id = req.body.user_id;
+        let type_id = req.body.type_id;
         voteUtil.upvote(type, user_id, type_id, function (err, body) {
             if (err) {
                 resp.json({success: false, msg: "error in getting upvotes."});

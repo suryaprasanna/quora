@@ -1,27 +1,27 @@
 "use strict";
 // NPM install mongoose and chai. Make sure mocha is globally
 // installed
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var chai = require('chai');
-var expect = chai.expect;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const chai = require('chai');
+const expect = chai.expect;
 // Create a new schema that accepts a 'name' object.
-var User = require('../../model/user');
-var Ques = require('../../model/question');
-var Ques_user = require('../../model/question_user');
-var Ques_ans = require('../../model/question_answer');
-var Ans = require('../../model/answer');
-var Ans_user = require('../../model/answer_user');
-var UserUtil = require('../../data/users');
-var QuesUtil = require('../../data/questions');
-var AnsUtil = require('../../data/answers');
+const User = require('../../model/user');
+const Ques = require('../../model/question');
+const Ques_user = require('../../model/question_user');
+const Ques_ans = require('../../model/question_answer');
+const Ans = require('../../model/answer');
+const Ans_user = require('../../model/answer_user');
+const UserUtil = require('../../data/users');
+const QuesUtil = require('../../data/questions');
+const AnsUtil = require('../../data/answers');
 //Create a new collection called 'Name'
 describe('Database Tests', function() {
   //Before starting the test, create a sandboxed database connection
   //Once a connection is established invoke done()
   before(function (done) {
     mongoose.connect('mongodb://localhost:27017/testDatabase', { useMongoClient: true });
-    var db = mongoose.connection;
+    const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error'));
     db.once('open', function() {
     //   console.log('We are connected to test database!');
@@ -46,7 +46,7 @@ describe('Database Tests', function() {
 
     it('Should authenticate the above added user', function(done){
       UserUtil.getUserbyname('mika', function(err, user){
-        UserUtil.comparePassword('mikamike', user.password,function (err) {
+        UserUtil.comparePassword('mikamike', user.password,err => {
           if(err) { throw new Error('Should generate error!'); }
           done();
         });
@@ -56,7 +56,7 @@ describe('Database Tests', function() {
 
     it('Should retrieve user details from test database', function(done) {
         //Look up the 'Mike' object previously saved.
-        User.findOne({name: 'Mike'}, function (err, user)  {
+        User.findOne({name: 'Mike'}, (err, user) => {
           if(err) {throw err;}
           if(user.length === 0) {throw new Error('No data!');}
           done();
@@ -71,7 +71,7 @@ describe('Database Tests', function() {
         email: 'mika1@ufl.edu',
         password: 'mikamike1'
       });
-      UserUtil.addUser(wrongSave, function (err) {
+      UserUtil.addUser(wrongSave, err => {
         if(err) { return done(); }
         throw new Error('Should generate error!');
       });
@@ -85,7 +85,7 @@ describe('Database Tests', function() {
           email: 'mika@ufl.edu',
           password: 'mikamike1'
         });
-        UserUtil.addUser(wrongSave, function (err) {
+        UserUtil.addUser(wrongSave, err => {
           if(err) { return done(); }
           throw new Error('Should generate error!');
         });
@@ -93,7 +93,7 @@ describe('Database Tests', function() {
       
     it('Test find all method in users', function(done) {
       //Look up the 'Mike' object previously saved.
-      User.find({}, function (err, user) {
+      User.find({}, (err, user) => {
         if(err) {throw err;}
         if(user.length === 0) {throw new Error('No data!');}
         // console.log(user.email);
@@ -128,7 +128,7 @@ describe('Database Tests', function() {
       }); 
       QuesUtil.askQuestion(q1,'When did the great war start?',function(err,resp){
         var id = resp.id;
-        Ques.findById(id, function (err, ques) {
+        Ques.findById(id, (err, ques) => {
           //console.log("QUESTION OBJ is: "+ques);
           //check for null ans object!!!!!!
           if(err) {throw err;}
@@ -146,7 +146,7 @@ describe('Database Tests', function() {
       }); 
       QuesUtil.askQuestion(q1,'When did the great war start?',function(err,resp){
         var id = resp.id;
-        Ques_user.findOne({q_id:id}, function (err, ques) {
+        Ques_user.findOne({q_id:id}, (err, ques) => {
           //console.log("QUESTION OBJ is: "+ques);
           //check for null ans object!!!!!!
           if(err) {throw err;}
@@ -170,7 +170,7 @@ describe('Database Tests', function() {
         var user_id = resp.user_id;
         QuesUtil.getQuestion(id, function(err, ques){
           if(ques.user_id != user_id) { throw new Error('Should generate error!');}
-          QuesUtil.editQuestion(ques.e_id, name, function (err) {
+          QuesUtil.editQuestion(ques.e_id, name,err => {
             if(err) { throw new Error('Should generate error!'); }
             done(); 
           });
@@ -189,7 +189,7 @@ describe('Database Tests', function() {
       });
       var question_id = "12";
       var name = "Great war was started on 1914.";
-      AnsUtil.putAnswer(ans,question_id,name, function (err) {
+      AnsUtil.putAnswer(ans,question_id,name,err => {
         if(err) {throw new Error('Should generate error!'); }
         done();
       });
@@ -208,7 +208,7 @@ describe('Database Tests', function() {
 
       AnsUtil.putAnswer(ans,question_id,name,function(err,resp){
         var id = resp.id;
-        Ans.findById(id, function (err, ans) {
+        Ans.findById(id, (err, ans) => {
           //console.log("ANSWER OBJ is: "+ans);
           //check for null ans object!!!!!!
           if(err) {throw err;}
@@ -231,7 +231,7 @@ describe('Database Tests', function() {
 
       AnsUtil.putAnswer(ans,question_id,name,function(err,resp){
         var id = resp.id;
-        Ques_ans.findOne({a_id: id}, function (err, ans) {
+        Ques_ans.findOne({a_id: id}, (err, ans) => {
           //console.log("QUESTION_ANSWER OBJ is: "+ans);
           //check for null ans object!!!!!!
           if(err) {throw err;}
@@ -258,7 +258,7 @@ describe('Database Tests', function() {
         var answer = "Great war was started on July 28th, 1914.";
         AnsUtil.getAnswer(id, function(err, a){
           if(a.user_id != user_id) { throw new Error('Should generate error!');}
-          AnsUtil.editAnswer(a.e_id, answer,function (err) {
+          AnsUtil.editAnswer(a.e_id, answer,err => {
             if(err) { throw new Error('Should generate error!'); }
             done(); 
           });

@@ -39,7 +39,7 @@ module.exports = {
 	upvote_solve : function(type, user_id, type_id, callback) {
 		var promise = new Promise((resolve, reject) => {
 			//console.log("data absent");
-			var v = new vote();
+			let v = new vote();
 			//console.log("c " + type + " c " + user_id + " v " + type_id);
 			v.type_id = type_id;
 			v.type = type;
