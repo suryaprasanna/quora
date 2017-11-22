@@ -11,9 +11,9 @@ var answerSchema = new Schema({
   upvotes: {type: Number},
   downvotes : {type: Number},
   is_anonymous : {type: Boolean},
-  comments : [Number],
-  created_on: {type: Date},
-  updated_on: {type: Date, default: Date.now}
+  comments : [{type: Schema.Types.ObjectId, ref: 'comment'}],
+  created_on: {type: Date, default: Date.now},
+  updated_on: {type: Date}
 });
 
 // the schema is useless so far
