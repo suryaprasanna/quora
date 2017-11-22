@@ -1,13 +1,10 @@
 var mongoose = require('mongoose');
 var question = require('../model/question');
-// mongoose.Promise = require('bluebird');
-// var client = require('../config/es_connection.js');
+
 var es_client = require('../config/es_handler.js');
 var Promises = require('promise');
 
-var questionUserUtil = require('../data/question_users');
-var questionUser = require('../model/question_user');
-var questionAnswer = require('../model/question_answer');
+var activity = require('../model/activity');
 
 var index = "quora";
 var type = "questions";
@@ -15,32 +12,14 @@ var type = "questions";
 module.exports = {
 
 	getQuestions : function() {
-		var promise = new Promise((resolve, reject) => {
-			resolve(questionAnswer.find({}));
+		var promise = new Promise(function(resolve, reject){
+			resolve(question.find({}));
 		});
 		return promise;
 	},
 
 	askQuestion : function(q, name, callback){
 
-		var createQuestionUserEntry = function(data) {
-			var promise = new Promise((resolve, reject) => {
-				//console.log("d1 " + data);
-				// var q1 = data.q;
-				// console.log("es " + data.esObj._id);
-				//console.log("q " + q._id);
-				//console.log("eq " + q.e_id);
-				// console.log("q " + q._id);
-
-				let qu = new questionUser();
-				qu.user_id = q.user_id;
-				qu.q_id = q._id;
-				qu.question = q.question;
-				resolve(qu.save());
-			});
-			return promise;
-		};
-		
 		var createQuestion = function(data) {
 			var promise = new Promise((resolve, reject) => {
 				q.e_id = data._id;
@@ -49,15 +28,22 @@ module.exports = {
 			return promise;
 		};
 
+		var createActivity = function(data) {
+			var promise = new Promise((resolve, reject) => {
+				var a1 = new activity();
+				a1.doc = "questions";
+				a1.type = "ask";
+				a1.doc_id = data._id;
+				a1.user_id = data.user_id;
+				resolve(a1.save());
+			});
+			return promise;
+		};
+
 		es_client.createDocument(index, type, name)
-			// .then(function (esObj) {
-			// 	return new Promise((resolve, reject) => {
-			// 		resolve({esObj: esObj, q : q});
-			// 	});
-			// })
 			.then(createQuestion)
-			.then(createQuestionUserEntry)
-			.then(data => {
+			.then(createActivity)
+			.then(function(data) {
 				var body = {
 					id : q._id,
 					question : name,
@@ -68,47 +54,43 @@ module.exports = {
 				callback(false, body);
 			})
 			.catch(function(err) {
-				//console.log(err);
+				console.log(err);
 				callback(err, true);
 			});
-
-		// client.index({
-		// 	index: index,
-		// 	type: "questions",
-		// 	body: {
-		// 		name : name
-		// 	}
-		// }).then(function (resp) {
-		// 	console.log("data " + resp._id);
-		// 	q.e_id = resp._id;
-		// 	return q.save();
-		// }).then(function (q1) {
-		// 	let qu = new questionUser();
-		// 	qu.user_id = q1.user_id;
-		// 	qu.q_id = q1._id;
-		// 	return qu.save();
-		// }).then(function (res) {
-		// 	console.log("success " + res);
-		// 	callback(false, res);
-		// }, function (err) {
-		// 	console.log(err);
-		// 	callback(err, true)
-		// });
 	},
 
-	editQuestion : function(eid, name) {
-		return es_client.updateDocument(index, eid, type, name);
+	editQuestion : function(q, name) {
+		var eid = q.e_id;
+		var promise = new Promise((resolve, reject) => {
+			resolve(es_client.updateDocument(index, eid, type, name));
+		}).then((data) => {
+			var promise = new Promise((resolve, reject) => {
+				q.question = name;
+				q.updated_on = new Date();
+				resolve(q.save());
+			});
+			return promise;
+		}).then((data) => {
+			var promise = new Promise((resolve, reject) => {
+				var a1 = new activity();
+				a1.doc = "questions";
+				a1.type = "edit";
+				a1.doc_id = data._id;
+				a1.user_id = data.user_id;
+				resolve(a1.save());
+			});
+			return promise;
+		});
+		return promise;
 	},
 
 	getQuestion : function(id){
-
-		// question.findById(id, callback);
-		var promise = new Promise((resolve, reject) => {
-			resolve(question.findById(id));
+		var promise = new Promise(function(resolve, reject){
+			console.log("id:" + id);
+			resolve(question.findById(id)
+				.populate({path: 'answers', model: 'answer'}));
+			console.log("qid: " + question);
 		});
 		return promise;
-
-	 //    const query = ({},{question: 1 });
-	 //    question.find({},{question: 1 }, callback);
 	}
 }
