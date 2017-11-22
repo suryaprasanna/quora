@@ -14,7 +14,14 @@
     "chai": "^4.1.2",
     "elasticsearch": "*",
     "mocha": "^3.5.3",
-    "mongoose": "^4.11.13"
+    "mongoose": "^4.11.13",
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "jsonwebtoken": "*",
+    "passport-jwt": "*",
+    "express": "*",
+    "promise" : "*",
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
     "bcryptjs": "*",

@@ -15,7 +15,7 @@ var type = "questions";
 module.exports = {
 
 	getQuestions : function() {
-		var promise = new Promise((resolve, reject) => {
+		var promise = new Promise(function(resolve, reject){
 			resolve(questionAnswer.find({}));
 		});
 		return promise;
@@ -24,7 +24,7 @@ module.exports = {
 	askQuestion : function(q, name, callback){
 
 		var createQuestionUserEntry = function(data) {
-			var promise = new Promise((resolve, reject) => {
+			var promise = new Promise(function(resolve, reject){
 				//console.log("d1 " + data);
 				// var q1 = data.q;
 				// console.log("es " + data.esObj._id);
@@ -32,7 +32,7 @@ module.exports = {
 				//console.log("eq " + q.e_id);
 				// console.log("q " + q._id);
 
-				let qu = new questionUser();
+				var qu = new questionUser();
 				qu.user_id = q.user_id;
 				qu.q_id = q._id;
 				qu.question = q.question;
@@ -42,7 +42,7 @@ module.exports = {
 		};
 		
 		var createQuestion = function(data) {
-			var promise = new Promise((resolve, reject) => {
+			var promise = new Promise(function(resolve, reject){
 				q.e_id = data._id;
 				resolve(q.save());
 			});
@@ -57,7 +57,7 @@ module.exports = {
 			// })
 			.then(createQuestion)
 			.then(createQuestionUserEntry)
-			.then(data => {
+			.then(function(data) {
 				var body = {
 					id : q._id,
 					question : name,
@@ -103,7 +103,7 @@ module.exports = {
 	getQuestion : function(id){
 
 		// question.findById(id, callback);
-		var promise = new Promise((resolve, reject) => {
+		var promise = new Promise(function(resolve, reject){
 			resolve(question.findById(id));
 		});
 		return promise;
