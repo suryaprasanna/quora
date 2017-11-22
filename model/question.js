@@ -13,10 +13,10 @@ var questionSchema = new Schema({
   is_anonymous : {type: Boolean},
   topics : [{type: Schema.Types.ObjectId, ref: 'topic'}],
   answers : [{type: Schema.Types.ObjectId, ref: 'answer'}],
-  comments : [{type: Schema.Types.ObjectId, ref: 'Ingredient'}],
+  comments : [{type: Schema.Types.ObjectId, ref: 'comment'}],
   created_on: {type: Date, default: Date.now},
   updated_on: {type: Date}
-});
+}, { usePushEach: true });
 
 // the schema is useless so far
 // we need to create a model using it

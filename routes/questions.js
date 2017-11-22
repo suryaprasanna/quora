@@ -35,6 +35,17 @@ module.exports = {
             })
     },
 
+    getQuestion : function(req, res) {
+        var question_id = req.param('question_id');
+        questionUtil.getQuestion(question_id)
+            .then((data) => {
+                console.log("qq: " + data);
+                res.json({success: true, body: data, msg: "Successfully retrieved question."});
+            }).catch((err) => {
+                res.json({success: false, msg: "Error in retieving question data."});
+            });
+    },
+
     askQuestion : function(req, res) {
         //console.log("aq " + req);        
 
@@ -58,12 +69,9 @@ module.exports = {
     },
 
     editQuestion : function(req, resp) {
-        var id = req.body.id;
+        var id = req.body.question_id;
         var name = req.body.name;
         var user_id = req.body.user_id;
-        // console.log("id : " + id);
-        // console.log("user_id : " + user_id);
-        // console.log("name : " + name);
         questionUtil.getQuestion(id)
             .then((q) => {
                 if (q.user_id === user_id) {

@@ -86,7 +86,10 @@ module.exports = {
 
 	getQuestion : function(id){
 		var promise = new Promise(function(resolve, reject){
-			resolve(question.findById(id));
+			console.log("id:" + id);
+			resolve(question.findById(id)
+				.populate({path: 'answers', model: 'answer'}));
+			console.log("qid: " + question);
 		});
 		return promise;
 	}

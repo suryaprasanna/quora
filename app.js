@@ -19,12 +19,12 @@ const searchController = require('./controller/search_controller');
 const bp = require('body-parser');
 app.use(bp.json());
 
-// All the /users are routed to userController.
+
 app.use('/users', userController);
 app.use('/question', questionController);
 app.use('/answer', answerController);
-
 app.use('/search', searchController);
+
 
 app.listen(3000, function(){
   console.log('App is now listening');
