@@ -1,12 +1,12 @@
 var UserUtil = require('../data/users');
 var User = require('../model/user');
-var jwt = require('jsonwebtoken');
-var config = require('../config/database');
+const jwt = require('jsonwebtoken');
+const config = require('../config/database');
 
 module.exports.authenticate = function(req, res){
     
-    var username = req.body.username;
-    var password = req.body.password;
+    const username = req.body.username;
+    const password = req.body.password;
 
     UserUtil.getUserbyname(username, function(err, user) {
         if (err) {
@@ -21,7 +21,7 @@ module.exports.authenticate = function(req, res){
                 res.json({success: false, msg: err});
             }
             if (isValid) {
-                var token = jwt.sign({data: user}, config.secret); 
+                const token = jwt.sign({data: user}, config.secret); 
                 res.json({
                   success: true,
                   token: 'JWT '+token,

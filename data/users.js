@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var User = require('../model/user');
-var bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 //module.exports.addUser = function(newUser, callback){
 //    newUser.save(callback);
@@ -12,8 +12,8 @@ module.exports.getUserbyname = function(username,callback){
 }
 
 module.exports.addUser = function(newUser, callback){
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(newUser.password, salt, function (err, hash) {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(newUser.password, salt, (err, hash) => {
         if(err) throw err;
         newUser.password = hash;
         newUser.save(callback);
