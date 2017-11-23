@@ -5,7 +5,6 @@ var questionUtil = require('../data/questions');
 
 module.exports = {
     getAnswers : function(req, res){
-        
         questionUtil.getQuestions(function(err, ques) {
             if (err) {
                 console.log("Not able to get questions from db.");
@@ -20,41 +19,38 @@ module.exports = {
 
     putAnswer : function(req, res) {
         console.log("aq " + req);
-        var a1 = new answer();
+        let a1 = new answer();
         a1.user_id = req.body.user_id;
         a1.answer = req.body.name;
         a1.is_anonymous = req.body.is_anonymous;
         a1.votes = 0;
         a1.created_on = new Date();
-        a1.updated_on = new Date();
 
         questionUtil.getQuestion(req.body.question_id)
             .then((q) => {
-                answerUtil.putAnswer(a1, q, req.body.name, function(err, resp){
-                    if (err) {
-                        console.log("Not able to get questions from db.");
+                answerUtil.putAnswer(a1, q)
+                    .then((data) => {
+                        res.json({success: true, body: data, msg: 'Successfully saved answer to db'});
+                    })
+                    .catch(function (err) {
+                        console.log("Not able to get questions from db.", err);
                         res.json({success: false, msg: 'Failed to save answer to db'});
-                    } else {
-                        console.log("hi resp " + resp);
-                        res.json({success: true, body: resp, msg: 'Successfully saved answer to db'});
-                    }
-                });
+                    });
             })
             .catch( function (err) {
-                res.json({success: false, msg: 'Failed to save answer to db'});
+                res.json({success: false, msg: 'Failed to get question for given qid.'});
             });
     },
 
     editAnswer : function(req, resp) {
-        var id = req.body.id;
+        var id = req.body.answer_id;
         var answer = req.body.name;
         var user_id = req.body.user_id;
         console.log(id);
         answerUtil.getAnswer(id)
-            .then((a) => {
-                console.log(a.e_id);
-                if (a.user_id === user_id) {
-                    answerUtil.editAnswer(a.e_id, answer)
+            .then((ans) => {
+                if (ans.user_id === user_id) {
+                    answerUtil.editAnswer(ans, answer)
                         .then((data) => {
                             resp.json({success: true, msg: "updated succesfully"});
                         })
