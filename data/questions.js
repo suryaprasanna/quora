@@ -13,7 +13,7 @@ module.exports = {
 
 	getQuestions : function() {
 		var promise = new Promise(function(resolve, reject){
-			resolve(question.find({}));
+			resolve(question.find());
 		});
 		return promise;
 	},
@@ -23,12 +23,16 @@ module.exports = {
 		var createQuestion = function(data) {
 			var promise = new Promise((resolve, reject) => {
 				q.e_id = data._id;
+				console.log("before save" + q);
 				resolve(q.save());
 			});
 			return promise;
 		};
 
 		var createActivity = function(data) {
+			
+			console.log("after save" + data);
+			
 			var promise = new Promise((resolve, reject) => {
 				var a1 = new activity();
 				a1.doc = "questions";
@@ -88,8 +92,10 @@ module.exports = {
 		var promise = new Promise(function(resolve, reject){
 			console.log("id:" + id);
 			resolve(question.findById(id)
-				.populate({path: 'answers', model: 'answer'}));
-			console.log("qid: " + question);
+				.populate({path: 'answers', model: 'answer'}//, {path: 'topics', model: 'topic'}
+				)
+				);
+			console.log("q: " + question);
 		});
 		return promise;
 	}

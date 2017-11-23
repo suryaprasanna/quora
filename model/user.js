@@ -8,6 +8,10 @@ var userSchema = new Schema({
   email: {type: String, required: true, unique: true },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true, unique: true },
+  following : [{type: Schema.Types.ObjectId, ref: 'user'}],
+  followers : [{type: Schema.Types.ObjectId, ref: 'user'}],
+  topics : [{type: Schema.Types.ObjectId, ref: 'topic'}],
+ 
   // admin: Boolean,
   // location: String,
   // meta: {
