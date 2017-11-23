@@ -30,7 +30,7 @@ module.exports = {
             .then((q) => {
                 answerUtil.putAnswer(a1, q)
                     .then((data) => {
-                        res.json({success: true, msg: 'Successfully saved answer to db'});
+                        res.json({success: true, body: data, msg: 'Successfully saved answer to db'});
                     })
                     .catch(function (err) {
                         console.log("Not able to get questions from db.", err);
