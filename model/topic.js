@@ -6,7 +6,6 @@ var Schema = mongoose.Schema;
 var topicSchema = new Schema({
   id: {type : Number},
   topic : {type: String},
-  following : [{type: Schema.Types.ObjectId, ref: 'user'}],
   followers : [{type: Schema.Types.ObjectId, ref: 'user'}],
   created_on: {type: Date, default: Date.now},
   updated_on: {type: Date}

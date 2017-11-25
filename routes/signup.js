@@ -25,7 +25,6 @@ module.exports.postUser = function(req, res){
                 email: user.email
               }
             });
-            res.json({success: true, msg: 'Successfully added user name' + user.name});
         }
     });
 };
