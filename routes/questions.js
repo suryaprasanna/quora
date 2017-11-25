@@ -2,6 +2,7 @@ var questionUtil = require('../data/questions');
 var question = require('../model/question');
 var Promises = require('promise');
 var voteUtil = require('../data/votes');
+var user = require('../model/user');
 
 module.exports = {
     getQuestions : function(req, res){
@@ -59,14 +60,16 @@ module.exports = {
         //console.log("aq " + req);        
 
         let q1 = new question();
+        console.log("req_body: "req.body);
         q1.user_id = req.body.user_id;
         q1.is_anonymous = req.body.is_anonymous;
         q1.votes = 0;
         q1.question = req.body.name;
         q1.topics = req.body.topics;
+        q1.followers = [];
         q1.created_on = new Date();
         q1.updated_on = new Date();
-
+        // console.log(q1);
         questionUtil.askQuestion(q1, req.body.name, function(err, resp){
             if (err) {
                 //console.log("Not able to get questions from db.");

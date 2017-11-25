@@ -11,6 +11,7 @@ var questionSchema = new Schema({
   upvotes: {type: Number},
   downvotes : {type: Number},
   is_anonymous : {type: Boolean},
+  followers : [{type: Schema.Types.ObjectId, ref: 'user'}],
   topics : [{type: Schema.Types.ObjectId, ref: 'topic'}],
   answers : [{type: Schema.Types.ObjectId, ref: 'answer'}],
   comments : [{type: Schema.Types.ObjectId, ref: 'comment'}],
