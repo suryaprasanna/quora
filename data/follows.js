@@ -15,7 +15,7 @@ module.exports = {
 			var fs = q.followers;
 			var f = false;
 			for (int i = 0; i < fs.length; i++) {
-				if (fs[i] === u) {
+				if (fs[i]._id === u._id) {
 					f = true;
 				}
 			}
@@ -61,7 +61,7 @@ module.exports = {
 			var fs = t.followers;
 			var f = false;
 			for (int i = 0; i < fs.length; i++) {
-				if (fs[i] === u) {
+				if (fs[i]._id === u._id) {
 					f = true;
 				}
 			}
@@ -77,15 +77,15 @@ module.exports = {
 			}).then((t2) => {
 				t_final = t2;
 				var ts = u.topics;
-				var f1 = fase;
+				var f1 = false;
 				for (int i =0; i< ts.length; i++) {
-					if (ts[i] === u) {
-						f = true;
+					if (ts[i]._id === t2._id) {
+						f1 = true;
 					}
 				}
 
 				var promise = new Promise((resolve, reject) => {
-					if (!f) {
+					if (!f1) {
 						ts.push(t2);
 						u.topics = ts;
 						resolve(u.save());
