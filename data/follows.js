@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var follow = require('../model/follow');
 var Promises = require('promise');
 var question = require('../model/question');
 var topic = require('../model/topic');
@@ -216,11 +215,139 @@ module.exports = {
 	},
 
 	unfollowTopic : function(tid, u) {
-		
+		var res = u;
+		var res_t = new topic();
+		var promise = new Promise((resolve, reject) => {
+			resolve(topic.findById(tid));
+		}).then((t) => {
+			var ts = t.followers;
+			var arr = [];
+			var f = false;
+			for (int i = 0; i < ts.length; i++) {
+				if (ts[i]._id === u._id) {
+					f = true;
+				} else {
+					arr.push(ts[i]);
+				}
+			}
+
+			var promise = new Promise((resolve, reject) => {
+				if (f) {
+					t.followers = arr;
+					resolve(t.save());
+				} else {
+					resolve(t);
+				}
+			}).then((t1) => {
+				res_t = t1;
+				var ts1 = u.topics;
+				var brr = [];
+				var f1 = false;
+				for (int i = 0; i < ts1.length; i++) {
+					if (ts1[i]._id === u._id) {
+						f1 = true;
+					} else {
+						brr.push(ts1[i]);
+					}
+				}
+				var promise = new Promise((resolve, reject) => {
+					if (f1) {
+						u.topics(brr);
+						resolve(u.save());
+					} else {
+						resolve(u);
+					}
+				});
+				return promise;
+			}).then((u2) => {
+				res = u2;
+				var promise = new Promise((resolve, reject) => {
+					if (f) {
+						var a = new activity();
+						a.doc = "topics";
+						a.doc_id = res_t._id;
+						a.type = "unfollowed the topic.";
+						resolve(a.save());
+					} else {
+						resolve(res);
+					}
+				});
+			}).then((data) => {
+				var promise = new Promise((resolve, reject) => {
+					resolve(res);
+				});
+				return promise;
+			});
+			return promise;
+		});
+		return promise;
 	},
 
 	unfollowUser : function(user_id, u) {
-		
+		var res = u;
+		var promise = new Promise((resolve, reject) => {
+			resolve(user.findById(user_id));
+		}).then((u1) => {
+			var us = u1.followers;
+			var arr = [];
+			var f = false;
+			for (int i = 0; i < us.length; i++) {
+				if (us[i]._id === u._id) {
+					f = true;
+				} else {
+					arr.push(us[i]);
+				}
+			}
+
+			var promise = new Promise((resolve, reject) => {
+				if (f) {
+					u1.followers = arr;
+					resolve(u1.save());
+				} else {
+					resolve(u1);
+				}
+			}).then((u2) => {
+				var us1 = u.following;
+				var brr = [];
+				var f1 = false;
+				for (int i = 0; i < us1.length; i++) {
+					if (us1[i]._id === u2._id) {
+						f1 = true;
+					} else {
+						brr.push(ts1[i]);
+					}
+				}
+				var promise = new Promise((resolve, reject) => {
+					if (f1) {
+						u.following(brr);
+						resolve(u.save());
+					} else {
+						resolve(u);
+					}
+				});
+				return promise;
+			}).then((u3) => {
+				res = u3;
+				var promise = new Promise((resolve, reject) => {
+					if (f) {
+						var a = new activity();
+						a.doc = "users";
+						a.doc_id = u3._id;
+						a.type = "unfollowed the user.";
+						resolve(a.save());
+					} else {
+						resolve(u3);
+					}
+				});
+			}).then((data) => {
+				var promise = new Promise((resolve, reject) => {
+					resolve(res);
+				});
+				return promise;
+			});
+			return promise;
+		});
+		return promise;
 	}
 
 }
