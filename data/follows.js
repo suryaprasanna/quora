@@ -109,7 +109,7 @@ module.exports = {
 				})
 			}).then((data) => {
 				var promise = new Promise((resolve, reject) => {
-					resolve(u);
+					resolve(res);
 				});
 				return promise;
 			});
@@ -118,6 +118,7 @@ module.exports = {
 	},
 
 	followUser : function(user_id, u) {
+		var res = u;
 		var promise = new Promise((resolve, reject) => {
 			resolve(user.findById(user_id));
 		}).then((uf) => {
@@ -148,6 +149,7 @@ module.exports = {
 				});
 				return promise;
 			}).then((u1) => {
+				res = u1;
 				var a = new activity();
 				a.doc = "users";
 				a.doc_id = u1._id;
@@ -157,6 +159,11 @@ module.exports = {
  					resolve(a.save());
  				});
  				return promise;
+			}).then((data) => {
+				var promise = new Promise((resolve, reject) => {
+					resolve(res);
+				});
+				return promise;
 			});
 			return promise;
 		});
@@ -171,7 +178,7 @@ module.exports = {
 			var arr = [];
 			var f = false;
 			for (int i = 0; i < fs.length; i++) {
-				if (fs[i] === u) {
+				if (fs[i]._id === u._id) {
 					f = true;
 				} else {
 					arr.push(fs[i]);
@@ -180,11 +187,28 @@ module.exports = {
 
 			var promise = new Promise((resolve, reject) => {
 				if (f) {
-					q.followers = fs;
+					q.followers = arr;
 					resolve(q.save());
 				} else {
 					resolve(q);
 				}
+			}).then((q1) => {
+				var promise = new Promise((resolve, reject) => {
+					if (f) {
+						var a = new activity();
+						a.doc = "questions";
+						a.doc_id = q1._id;
+						a.type = "unfollowed the question.";
+						resolve(a.save());
+					} else {
+						resolve(q1);
+					}
+				});
+			}).then((data) => {
+				var promise = new Promise((resolve, reject) => {
+					resolve(u);
+				});
+				return promise;
 			});
 			return promise;
 		});
