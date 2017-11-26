@@ -124,7 +124,7 @@ module.exports = {
 			var fs = uf.followers;
 			var f = false;
 			for (int i = 0; i < fs.length; i++) {
-				if (fs[i] === u) {
+				if (fs[i]._id === u._id) {
 					f = true;
 				}
 			}
@@ -140,13 +140,23 @@ module.exports = {
 			}).then((uf1) => {
 				var promise = new Promise((resolve, reject) => {
 					if (!f) {
-						u.followers.push(uf1);
+						u.following.push(uf1);
 						resolve(u.save());
 					} else {
 						resolve(u);
 					}
 				});
 				return promise;
+			}).then((u1) => {
+				var a = new activity();
+				a.doc = "users";
+				a.doc_id = u1._id;
+ 				a.user_id = u1._id;
+ 				a.type = "Started following the user.";
+ 				var promise = new Promise((resolve, reject) => {
+ 					resolve(a.save());
+ 				});
+ 				return promise;
 			});
 			return promise;
 		});
