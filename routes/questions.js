@@ -60,7 +60,7 @@ module.exports = {
         //console.log("aq " + req);        
 
         let q1 = new question();
-        console.log("req_body: "req.body);
+        console.log("req_body: "+ req.body);
         q1.user_id = req.body.user_id;
         q1.is_anonymous = req.body.is_anonymous;
         q1.votes = 0;
