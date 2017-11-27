@@ -90,20 +90,11 @@ module.exports = {
 				}
 			}).then((t2) => {
 				t_final = t2;
-				var ts = u.topics;
-				var f1 = false;
-				var v1 = t2._id.toString();
-				for (var i =0; i< ts.length; i++) {
-					var v2 = ts[i]._id.toString();
-					if (v1 === v2) {
-						console.log("found user match2");
-						f1 = true;
-					}
-				}
 
 				var promise = new Promise((resolve, reject) => {
-					if (!f1) {
+					if (!f) {
 						console.log("updating user");
+						var ts = u.topics;
 						ts.push(t2);
 						u.topics = ts;
 						resolve(u.save());
@@ -113,6 +104,7 @@ module.exports = {
 				});
 				return promise;
 			}).then((u) => {
+				res = u;
 				var promise = new Promise((resolve, reject) => {
 					if (!f) {
 						console.log("creating activity.");
@@ -123,7 +115,7 @@ module.exports = {
 						a.user_id = u._id;
 						resolve(a.save());
 					} else {
-						resolve(t1);
+						resolve(u);
 					}
 				})
 			}).then((data) => {
@@ -143,8 +135,10 @@ module.exports = {
 		}).then((uf) => {
 			var fs = uf.followers;
 			var f = false;
+			var v1 = u._id.toString();
 			for (var i = 0; i < fs.length; i++) {
-				if (fs[i]._id === u._id) {
+				var v2 = fs[i]._id.toString();
+				if (v1 === v2) {
 					console.log("found user match");
 					f = true;
 				}
@@ -161,19 +155,10 @@ module.exports = {
 				}
 			}).then((uf1) => {
 				
-				var ts = u.following;
-				var f1 = false;
-				for (var i =0; i< ts.length; i++) {
-					if (ts[i]._id === uf1._id) {
-						console.log("found user match2");
-						f1 = true;
-					}
-				}
-
 				var promise = new Promise((resolve, reject) => {
-					if (!f1) {
+					if (!f) {
 						console.log("updating user2");
-						u.following.push(uf1);
+						u.following = uf1;
 						resolve(u.save());
 					} else {
 						resolve(u);
@@ -266,8 +251,10 @@ module.exports = {
 			var ts = t.followers;
 			var arr = [];
 			var f = false;
+			var v1 = u._id.toString();
 			for (var i = 0; i < ts.length; i++) {
-				if (ts[i]._id === u._id) {
+				var v2 = ts[i]._id.toString();
+				if (v1 === v2) {
 					console.log("user match found");
 					f = true;
 				} else {
@@ -285,21 +272,25 @@ module.exports = {
 				}
 			}).then((t1) => {
 				res_t = t1;
-				var ts1 = u.topics;
-				var brr = [];
-				var f1 = false;
-				for (var i = 0; i < ts1.length; i++) {
-					if (ts1[i]._id === u._id) {
-						console.log("user match found2");
-						f1 = true;
-					} else {
-						brr.push(ts1[i]);
-					}
-				}
+
 				var promise = new Promise((resolve, reject) => {
-					if (f1) {
+					if (f) {
+						var vt = t1._id.toString();
+						console.log("inside f user " + vt);
+						var ts1 = u.topics;
+						var brr = [];
+						for (var i = 0; i < ts1.length; i++) {
+							var v3 = ts1[i]._id.toString();
+							console.log(v3);
+							if (vt === v3) {
+								console.log("user match found " + vt);
+							} else {
+								brr.push(v3);
+							}
+						}
+
 						console.log("updating user");
-						u.topics(brr);
+						u.topics = brr;
 						resolve(u.save());
 					} else {
 						resolve(u);
@@ -339,12 +330,14 @@ module.exports = {
 			var us = u1.followers;
 			var arr = [];
 			var f = false;
+			var v1 = u._id.toString();
 			for (var i = 0; i < us.length; i++) {
-				if (us[i]._id === u._id) {
+				var v2 = us[i]._id.toString();
+				if (v1 === v2) {
 					console.log("user match found.");
 					f = true;
 				} else {
-					arr.push(us[i]);
+					arr.push(v2);
 				}
 			}
 
@@ -357,21 +350,21 @@ module.exports = {
 					resolve(u1);
 				}
 			}).then((u2) => {
-				var us1 = u.following;
-				var brr = [];
-				var f1 = false;
-				for (var i = 0; i < us1.length; i++) {
-					if (us1[i]._id === u2._id) {
-						console.log("user match found2");
-						f1 = true;
-					} else {
-						brr.push(ts1[i]);
-					}
-				}
 				var promise = new Promise((resolve, reject) => {
-					if (f1) {
+					if (f) {
+						var ts1 = u.following;
+						var brr = [];
+						var vt = u2._id.toString();
+						for (var i = 0; i < ts1.length; i++) {
+							var v3 = ts1[i]._id.toString();
+							if (vt === v3) {
+								console.log("user match found");
+							} else {
+								brr.push(v3);
+							}
+						}
 						console.log("updating user2");
-						u.following(brr);
+						u.following = brr;
 						resolve(u.save());
 					} else {
 						resolve(u);
