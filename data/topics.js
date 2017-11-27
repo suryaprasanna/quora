@@ -6,7 +6,9 @@ var Promises = require('promise');
 module.exports = {
 	getTopics : function () {
 		var promise = new Promise((resolve, reject) => {
-			resolve(topic.find());
+			resolve(topic.find()
+				.populate({path : 'followers'})
+			);
 		});
 		return promise;
 	},
@@ -22,9 +24,10 @@ module.exports = {
 
 	getTopic : function(id) {
 		var promise = new Promise((resolve, reject) => {
-			resolve(topic.findById(id));
+			resolve(topic.findById(id)
+				.populate({path: 'followers'})
+			);
 		});
 		return promise;
 	}
-
 }

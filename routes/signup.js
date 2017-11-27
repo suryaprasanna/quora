@@ -7,14 +7,17 @@ module.exports.postUser = function(req, res){
         name: req.body.name,
         email: req.body.email,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        topics : req.body.topics,
+        following : [],
+        followers : []
     });
     UserUtil.addUser(newUser, function(err, user) {
         if (err) {
             //console.log("Not able to add user to db.");
             res.json({success: false, msg: 'Failed to add user'});
         } else {
-            const token = "token"; 
+            const token = "token";
             res.json({
               success: true,
               token: token,
@@ -22,7 +25,10 @@ module.exports.postUser = function(req, res){
                 id: user._id,
                 name: user.name,
                 username: user.username,
-                email: user.email
+                email: user.email,
+                topics : user.topics,
+                followers : user.followers,
+                following : user.following
               }
             });
         }

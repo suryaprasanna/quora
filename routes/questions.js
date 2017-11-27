@@ -14,34 +14,6 @@ module.exports = {
             }).catch((err) => {
                 res.json({success: false, msg: "Error in retieving questions data."});
             });
-
-        // questionUtil.getQuestions()
-        //     .then((data) => {
-        //         var r1 = {};
-        //         for (var i in data) {
-        //             var o = data[i];
-        //             if (!(o.q_id in r1)) {
-        //                 //console.log("in isde " + o.q_id);
-        //                 r1[o.q_id] = {question : o.question};
-        //             } else {
-        //                 //console.log("here");
-        //             }
-        //         }
-        //         for (var i in data) {
-        //             var o = data[i];
-        //             var obj = r1[o.q_id];
-        //             if (!("answers" in obj)) {
-        //                 obj["answers"] = [];
-        //             }
-        //             var answer = {"id" : o.a_id, "answer" : o.answer};
-        //             obj["answers"].push(answer);
-        //         }
-        //         res.json({r1 : r1});
-        //     })
-        //     .catch((err) => {
-        //         //console.log("error occured in geting question " , err);
-        //         res.json({"success" : false, msg : "error occured in getting quesitons."});
-        //     })
     },
 
     getQuestion : function(req, res) {
@@ -60,13 +32,14 @@ module.exports = {
         //console.log("aq " + req);        
 
         let q1 = new question();
-        console.log("req_body: "req.body);
-        q1.user_id = req.body.user_id;
+        console.log("req_body: "+ req.body);
+        q1.user = req.body.user_id;
         q1.is_anonymous = req.body.is_anonymous;
         q1.votes = 0;
         q1.question = req.body.name;
         q1.topics = req.body.topics;
         q1.followers = [];
+        q1.followers.push(req.body.user_id);
         q1.created_on = new Date();
         q1.updated_on = new Date();
         // console.log(q1);
@@ -87,7 +60,7 @@ module.exports = {
         var user_id = req.body.user_id;
         questionUtil.getQuestion(id)
             .then((q) => {
-                if (q.user_id === user_id) {
+                if (q.user._id === user_id) {
                     questionUtil.editQuestion(q, name)
                         .then((data) => {
                             resp.json({success: true, msg: "updated succesfully"});
