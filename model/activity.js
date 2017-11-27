@@ -8,9 +8,8 @@ var activitySchema = new Schema({
   doc : {type : String},
   type : {type: String},
   doc_id : {type : String},
-  user_id: { type: String},
-  created_on: {type: Date},
-  updated_on: {type: Date, default: Date.now}
+  user: {type: Schema.Types.ObjectId, ref: 'user'},
+  created_on: {type: Date, default: Date.now}
 });
 
 // the schema is useless so far

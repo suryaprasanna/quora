@@ -18,14 +18,13 @@ module.exports = {
     },
 
     putAnswer : function(req, res) {
-        console.log("aq " + req);
+        // console.log("aq " + req);
         let a1 = new answer();
-        a1.user_id = req.body.user_id;
+        a1.user = req.body.user_id;
         a1.answer = req.body.name;
         a1.is_anonymous = req.body.is_anonymous;
         a1.votes = 0;
-        a1.created_on = new Date();
-
+        a1.updated_on = new Date();
         questionUtil.getQuestion(req.body.question_id)
             .then((q) => {
                 answerUtil.putAnswer(a1, q)
@@ -49,7 +48,7 @@ module.exports = {
         console.log(id);
         answerUtil.getAnswer(id)
             .then((ans) => {
-                if (ans.user_id === user_id) {
+                if (ans.user._id === user_id) {
                     answerUtil.editAnswer(ans, answer)
                         .then((data) => {
                             resp.json({success: true, msg: "updated succesfully"});
