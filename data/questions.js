@@ -26,19 +26,6 @@ module.exports = {
 		}).then((data) => {
 			var promise = new Promise((resolve, reject) => {
 				q.e_id = data.e_id;
-				resolve(q);
-			});
-			return promise;
-		}).then((q) => {
-			var promise = new Promise((resolve, reject) => {
-				// console.log("uu: " + q.user_id);
-				resolve(user.findById(q.user_id));
-			});
-			return promise;
-		}).then((user) => {
-			var promise = new Promise((resolve, reject) => {
-				// console.log("s: " + user);
-				q.followers.push(user);
 				resolve(q.save());
 			});
 			return promise;
@@ -54,6 +41,11 @@ module.exports = {
 			});
 			return promise;
 		}).then((data) => {
+			var promise = new Promise((resolve, reject) => {
+				resolve(this.getQuestion(q._id));
+			});
+			return promise;
+		}).then((res) => {
 
 			callback(false, q);
 
@@ -65,6 +57,7 @@ module.exports = {
 			// });
 			// return promise;
 		}).catch((err) => {
+			console.log(err);
 			callback(err, false);
 		});
 		return promise;
@@ -108,12 +101,14 @@ module.exports = {
 
 	getQuestion : function(id){
 		var promise = new Promise(function(resolve, reject){
-			// console.log("id:" + id);
 			resolve(question.findById(id)
-				.populate({path: 'answers', model: 'answer'}//, {path: 'topics', model: 'topic'}
-				)
+				.populate({path: 'user'})
+				.populate({path: 'answers'})
+				.populate({path: 'comments'})
+				.populate({path: 'topics'})
+				.populate({path: 'followers'})
+				// .populate({path: 'answers.user'})
 				);
-			// console.log("q: " + question);
 		});
 		return promise;
 	}

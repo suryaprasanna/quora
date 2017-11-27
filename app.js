@@ -22,6 +22,9 @@ const unfollowController = require('./controller/unfollow_controller');
 const bp = require('body-parser');
 app.use(bp.json());
 
+// var aa = require('./data/questions.js');
+// aa.getQuestion("5a1b414706d27548190c2841");
+
 
 app.use('/users', userController);
 app.use('/question', questionController);

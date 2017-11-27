@@ -7,7 +7,7 @@ var questionSchema = new Schema({
   id: {type : Number},
   question : {type: String},
   e_id : {type: String},
-  user_id: { type: String},
+  user: {type: Schema.Types.ObjectId, ref: 'user'},
   upvotes: {type: Number},
   downvotes : {type: Number},
   is_anonymous : {type: Boolean},

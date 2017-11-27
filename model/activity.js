@@ -8,7 +8,7 @@ var activitySchema = new Schema({
   doc : {type : String},
   type : {type: String},
   doc_id : {type : String},
-  user_id: { type: String},
+  user: {type: Schema.Types.ObjectId, ref: 'user'},
   created_on: {type: Date, default: Date.now}
 });
 

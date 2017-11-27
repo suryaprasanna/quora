@@ -1,5 +1,5 @@
 var followUtil = require('../data/follows');
-var user = require('../model/user');
+var userUtil = require('../data/users');
 var Promises = require('promise');
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
         // console.log("fq body " + req.body);
         var qid = req.body.question_id;
         var user_id = req.body.user_id;
-        user.findById(user_id)
+        userUtil.getUser(user_id)
             .then((user) => {
                 followUtil.followQuestion(qid, user)
                     .then((data) => {
@@ -27,7 +27,7 @@ module.exports = {
         // console.log("ft body " + req.body);
         var tid = req.body.topic_id;
         var user_id = req.body.user_id;
-        user.findById(user_id)
+        userUtil.getUser(user_id)
             .then((user) => {
                 followUtil.followTopic(tid, user)
                     .then((data) => {
@@ -46,7 +46,7 @@ module.exports = {
         // console.log("fu body " + req.body);
         var fuid = req.body.follow_user_id;
         var user_id = req.body.user_id;
-        user.findById(user_id)
+        userUtil.getUser(user_id)
             .then((user) => {
                 followUtil.followUser(fuid, user)
                     .then((data) => {
@@ -62,12 +62,13 @@ module.exports = {
     },
 
     unfollowQuestion : function(req, res) {
-        // console.log("uq body " + req.body);
+        console.log("uq body " + req.body);
+
         var qid = req.body.question_id;
         var user_id = req.body.user_id;
-        user.findById(user_id)
-            .then((user) => {
-                followUtil.unfollowQuestion(qid, user)
+        userUtil.getUser(user_id)
+            .then((u) => {
+                followUtil.unfollowQuestion(qid, u)
                     .then((data) => {
                         res.json({success: true, body: data, msg: "Successfully unfollowed the question."});
                     }).catch((err) => {
@@ -84,7 +85,7 @@ module.exports = {
         // console.log("ut body " + req.body);
         var tid = req.body.topic_id;
         var user_id = req.body.user_id;
-        user.findById(user_id)
+        userUtil.getUser(user_id)
             .then((user) => {
                 followUtil.unfollowTopic(tid, user)
                     .then((data) => {
@@ -103,7 +104,7 @@ module.exports = {
         // console.log("uu body " + req.body);
         var fuid = req.body.unfollow_user_id;
         var user_id = req.body.user_id;
-        user.findById(user_id)
+        userUtil.getUser(user_id)
             .then((user) => {
                 followUtil.unfollowUser(fuid, user)
                     .then((data) => {

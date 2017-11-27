@@ -6,12 +6,11 @@ var Schema = mongoose.Schema;
 var answerSchema = new Schema({
   id: {type : Number},
   answer : {type: String},
-  e_id : {type: String},
-  user_id: { type: String},
+  user: {type: Schema.Types.ObjectId, ref: 'user'},
   upvotes: {type: Number},
   downvotes : {type: Number},
   is_anonymous : {type: Boolean},
-  _creator : { type: Schema.Types.ObjectId, ref: 'question' },
+  // _creator : { type: Schema.Types.ObjectId, ref: 'question' },
   comments : [{type: Schema.Types.ObjectId, ref: 'comment'}],
   created_on: {type: Date, default: Date.now},
   updated_on: {type: Date}

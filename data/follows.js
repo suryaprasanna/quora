@@ -5,16 +5,23 @@ var topic = require('../model/topic');
 var user = require('../model/user');
 var activity = require('../model/activity');
 
+var userUtil = require('../data/users');
+var questionUtil = require('../data/questions');
+var topicUtil = require('../data/topics');
+
 module.exports = {
 
 	followQuestion : function(qid, u) {
 		var promise = new Promise((resolve, reject) => {
-			resolve(question.findById(qid));
+			resolve(questionUtil.getQuestion(qid));
 		}).then((q) => {
 			var fs = q.followers;
 			var f = false;
+			var v2 = u._id.toString();
+			
 			for (var i = 0; i < fs.length; i++) {
-				if (fs[i]._id === u._id) {
+				var v1 = fs[i]._id.toString();
+				if (v1 === v2) {
 					console.log("found user match");
 					f = true;
 				}
@@ -58,12 +65,15 @@ module.exports = {
 		var res = u;
 		var t_final = new topic();
 		var promise = new Promise((resolve, reject) => {
-			resolve(topic.findById(tid));
+			resolve(topicUtil.getTopic(tid));
 		}).then((t) => {
 			var fs = t.followers;
 			var f = false;
+			var v1 = u._id.toString();
+
 			for (var i = 0; i < fs.length; i++) {
-				if (fs[i]._id === u._id) {
+				var v2 = fs[i]._id.toString();
+				if (v1 === v2) {
 					console.log("found user match");
 					f = true;
 				}
@@ -82,8 +92,10 @@ module.exports = {
 				t_final = t2;
 				var ts = u.topics;
 				var f1 = false;
+				var v1 = t2._id.toString();
 				for (var i =0; i< ts.length; i++) {
-					if (ts[i]._id === t2._id) {
+					var v2 = ts[i]._id.toString();
+					if (v1 === v2) {
 						console.log("found user match2");
 						f1 = true;
 					}
@@ -127,7 +139,7 @@ module.exports = {
 	followUser : function(user_id, u) {
 		var res = u;
 		var promise = new Promise((resolve, reject) => {
-			resolve(user.findById(user_id));
+			resolve(userUtil.getUser(user_id));
 		}).then((uf) => {
 			var fs = uf.followers;
 			var f = false;
@@ -197,13 +209,15 @@ module.exports = {
 
 	unfollowQuestion : function(qid, u) {
 		var promise = new Promise((resolve, reject) => {
-			resolve(question.findById(qid));
+			resolve(questionUtil.getQuestion(qid));
 		}).then((q) => {
 			var fs = q.followers;
 			var arr = [];
 			var f = false;
+			var v2 = u._id.toString();
 			for (var i = 0; i < fs.length; i++) {
-				if (fs[i]._id === u._id) {
+				var v1 = fs[i]._id.toString();
+				if (v1 === v2) {
 					console.log("user match found.");
 					f = true;
 				} else {
@@ -247,7 +261,7 @@ module.exports = {
 		var res = u;
 		var res_t = new topic();
 		var promise = new Promise((resolve, reject) => {
-			resolve(topic.findById(tid));
+			resolve(topicUtil.getTopic(tid));
 		}).then((t) => {
 			var ts = t.followers;
 			var arr = [];
@@ -320,7 +334,7 @@ module.exports = {
 	unfollowUser : function(user_id, u) {
 		var res = u;
 		var promise = new Promise((resolve, reject) => {
-			resolve(user.findById(user_id));
+			resolve(userUtil.getUser(user_id));
 		}).then((u1) => {
 			var us = u1.followers;
 			var arr = [];
