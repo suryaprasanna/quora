@@ -16,8 +16,8 @@ module.exports = {
 		var promise = new Promise(function(resolve, reject){
 			resolve(question.find()
 				.populate({path: 'user'})
-				.populate({path: 'answers', populate: {path: 'user', model: 'user'}})
-				.populate({path: 'comments'})
+				.populate({path: 'answers', populate: {path: 'user'}})//, model: 'user'}})
+				.populate({path: 'comments', populate : {path: 'user'}})
 				.populate({path: 'topics'})
 				.populate({path: 'followers'})
 			);
@@ -109,8 +109,8 @@ module.exports = {
 		var promise = new Promise(function(resolve, reject){
 			resolve(question.findById(id)
 				.populate({path: 'user'})
-				.populate({path: 'answers', populate: {path: 'user', model: 'user'}})
-				.populate({path: 'comments'})
+				.populate({path: 'answers', populate: {path: 'user'}})//, model: 'user'}})
+				.populate({path: 'comments', populate : {path: 'user'}})
 				.populate({path: 'topics'})
 				.populate({path: 'followers'})
 				// .populate({path: 'answers.user'})
