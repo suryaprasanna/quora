@@ -64,7 +64,7 @@ module.exports = {
     unfollowQuestion : function(req, res) {
         console.log("uq body " + req.body);
 
-        var qid = req.body.question_id;
+        var qid = req.body.unfollow_question_id;
         var user_id = req.body.user_id;
         userUtil.getUser(user_id)
             .then((u) => {
@@ -83,7 +83,7 @@ module.exports = {
 
     unfollowTopic : function(req, res) {
         // console.log("ut body " + req.body);
-        var tid = req.body.topic_id;
+        var tid = req.body.unfollow_topic_id;
         var user_id = req.body.user_id;
         userUtil.getUser(user_id)
             .then((user) => {
