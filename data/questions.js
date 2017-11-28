@@ -14,7 +14,13 @@ module.exports = {
 
 	getQuestions : function() {
 		var promise = new Promise(function(resolve, reject){
-			resolve(question.find());
+			resolve(question.find()
+				.populate({path: 'user'})
+				.populate({path: 'answers'})
+				.populate({path: 'comments'})
+				.populate({path: 'topics'})
+				.populate({path: 'followers'})
+			);
 		});
 		return promise;
 	},
