@@ -16,8 +16,8 @@ module.exports = {
         newComment.save()
             .then((data) => {
                 commentUtil.commentOnQues(data, data.doc_id)
-                    .then((data) => {
-                        res.json({success: true, msg: 'successfully posted comment for question'});
+                    .then((data1) => {
+                        res.json({success: true, body:data, msg: 'successfully posted comment for question'});
                     })
                     .catch((err) => {
                         console.log("Error while posting a comment " + err);
@@ -40,7 +40,7 @@ module.exports = {
             .then((data) => {
                 commentUtil.commentOnAns(data, req.body.answer_id)
                     .then((data) => {
-                        res.json({success: true, msg: 'successfully posted comment for answer'});
+                        res.json({success: true, body:data.comments, msg: 'successfully posted comment for answer'});
                     })
                     .catch((err) => {
                         console.log("Error while posting a comment "+err);
