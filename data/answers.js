@@ -53,8 +53,6 @@ module.exports = {
 				.populate({path : 'user'})
 				.populate({path : 'comments'})
 			);
-		}).then((data) => {
-			console.log(data);
 		});
 		return promise;
 	}
