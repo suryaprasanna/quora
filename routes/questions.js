@@ -12,6 +12,7 @@ module.exports = {
                 console.log("qq: " + data);
                 res.json({success: true, body: data, msg: "Successfully retrieved all questions."});
             }).catch((err) => {
+                console.log(err);
                 res.json({success: false, msg: "Error in retieving questions data."});
             });
     },
