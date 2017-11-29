@@ -17,6 +17,17 @@ module.exports = {
             });
     },
 
+    getUnansweredQuestions : function(req,res) {
+        questionUtil.getUnansweredQuestions()
+            .then((data) => {
+                console.log("qq: " + data);
+                res.json({success: true, body: data, msg: "Successfully retrieved unanswered questions."});
+            }).catch((err) => {
+                console.log(err);
+                res.json({success: false, msg: "Error in retieving unanswered questions data."});
+            });
+    },
+
     getQuestion : function(req, res) {
         var question_id = req.query.question_id;
         questionUtil.getQuestion(question_id)
