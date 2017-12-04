@@ -9,8 +9,22 @@ module.exports = {
 
         questionUtil.getQuestions()
             .then((data) => {
-                console.log("qq: " + data);
-                res.json({success: true, body: data, msg: "Successfully retrieved all questions."});
+                var obj = [];
+                for (var i = 0; i < data.length; i++) {
+                    var f = false;
+                    a2 = [];
+                    var q = data[i];
+                    for (var j = 0; j < q.answers.length; j++) {
+                        if (f) break;
+                        var a = q.answers[j];
+                        a2.push(a);
+                        f = true;
+                    }
+                    q.answers = a2;
+                    obj.push(q);
+                }
+                console.log("qq: " + obj);
+                res.json({success: true, body: obj, msg: "Successfully retrieved all questions."});
             }).catch((err) => {
                 console.log(err);
                 res.json({success: false, msg: "Error in retieving questions data."});
