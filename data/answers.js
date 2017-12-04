@@ -13,6 +13,7 @@ module.exports = {
 			var promise = new Promise((resolve, reject) => {
 				var arr = q.answers;
 				arr.push(data);
+				q.is_answered = true;
 				q.answers = arr;
 				resolve(q.save());
 			})

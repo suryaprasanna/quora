@@ -25,6 +25,17 @@ module.exports = {
 		return promise;
 	},
 
+	getUnansweredQuestions : function() {
+		var promise = new Promise(function(resolve, reject) {
+			resolve(question.find({is_answered : false})
+				.populate({path: 'user'})
+				.populate({path: 'topics'})
+				.populate({path: 'followers'})
+			);
+		});
+		return promise;
+	},
+
 	askQuestion : function(q, name, callback){
 
 		var promise = new Promise((resolve, reject) => {

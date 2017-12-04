@@ -12,6 +12,8 @@ router.post('/downvote', Questions.downvote);
 
 router.get('/get', Questions.getQuestion);
 router.get('/getAll', Questions.getQuestions);
+router.get('/getUnanswered', Questions.getUnansweredQuestions);
+
 
 
 module.exports = router;
