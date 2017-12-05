@@ -5,9 +5,20 @@ node_js:
   - '8.9.1'
 
 services: 
-  mongodb
-  elasticsearch
+  - elasticsearch
+  - mongodb
+
 
 branches:
   only:
     - master
+
+before script:
+ - sleep 15
+ - mongo mydb_test --eval 'db.addUser("travis", "test");'
+
+script:
+  - sudo service elasticsearch start
+  - sudo rm /var/lib/mongodb/mongod.lock
+  - sudo service mongod restart
+  - npm test
