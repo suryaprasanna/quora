@@ -17,6 +17,5 @@ before script:
  - mongo mydb_test --eval 'db.addUser("travis", "test");'
 
 script:
-  - mongo --eval 'db.hostInfo()'
   - sudo rm /var/lib/mongodb/mongod.lock
   - sudo service mongod restart
