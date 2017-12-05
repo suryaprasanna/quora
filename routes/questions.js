@@ -24,9 +24,11 @@ module.exports = {
                     obj.push(q);
                 }
                 console.log("qq: " + obj);
+                res.status(200);
                 res.json({success: true, body: obj, msg: "Successfully retrieved all questions."});
             }).catch((err) => {
                 console.log(err);
+                res.status(500);
                 res.json({success: false, msg: "Error in retieving questions data."});
             });
     },
@@ -35,9 +37,11 @@ module.exports = {
         questionUtil.getUnansweredQuestions()
             .then((data) => {
                 console.log("qq: " + data);
+                res.status(200);
                 res.json({success: true, body: data, msg: "Successfully retrieved unanswered questions."});
             }).catch((err) => {
                 console.log(err);
+                res.status(500);
                 res.json({success: false, msg: "Error in retieving unanswered questions data."});
             });
     },
@@ -47,9 +51,11 @@ module.exports = {
         questionUtil.getQuestion(question_id)
             .then((data) => {
                 console.log("qq: " + data);
+                res.status(200);
                 res.json({success: true, body: data, msg: "Successfully retrieved question."});
             }).catch((err) => {
                 console.log(err);
+                res.status(500);
                 res.json({success: false, msg: "Error in retieving question data."});
             });
     },
@@ -72,9 +78,11 @@ module.exports = {
         questionUtil.askQuestion(q1, req.body.name, function(err, resp){
             if (err) {
                 //console.log("Not able to get questions from db.");
+                res.status(500);
                 res.json({success: false, msg: 'Failed to save question to db'});
             } else {
                 //console.log("hi resp " + resp);
+                res.status(200);
                 res.json({success: true, body: resp, msg: 'Successfully saved question to db'});
             }
         });
@@ -89,34 +97,21 @@ module.exports = {
                 if (q.user._id === user_id) {
                     questionUtil.editQuestion(q, name)
                         .then((data) => {
+                            resp.status(200);
                             resp.json({success: true, msg: "updated succesfully"});
                         })
                         .catch(function (err) {
+                            resp.status(500);
                             resp.json({success: false, msg: "failed to update to database."});
                         });
                 } else {
+                    resp.status(403);
                     resp.json({success: false, msg: "not the owner of the question"});
                 }
             })
             .catch(function (err) {
+                resp.status(400);
                 resp.json({success: false, msg: "error in fetching user details"});
             });
-    },
-
-    upvote : function(req, resp) {
-        let type = 0;
-        let user_id = req.body.user_id;
-        let type_id = req.body.type_id;
-        voteUtil.upvote(type, user_id, type_id, function (err, body) {
-            if (err) {
-                resp.json({success: false, msg: "error in getting upvotes."});
-            } else {
-                resp.json({success: true, msg: "Succesfully upvoted."});
-            }
-        });
-    },
-
-    downvote : function(req, resp) {
-
     }
 }
