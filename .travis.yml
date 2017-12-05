@@ -14,3 +14,6 @@ branches:
 
 before script:
  - sleep 15
+
+script:
+  - mongo --eval 'db.hostInfo()'
