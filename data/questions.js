@@ -21,6 +21,15 @@ module.exports = {
 				.populate({path: 'topics'})
 				.populate({path: 'followers'})
 			);
+		}).then((d) => {
+			var promise = new Promise((resolve, reject) => {
+				var res = [];
+				for (var i = 0; i < d.length; i++) {
+					res.unshift(d[i]);
+				}
+				resolve(res);
+			});
+			return promise;
 		});
 		return promise;
 	},
