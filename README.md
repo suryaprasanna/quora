@@ -1,3 +1,4 @@
+[![Build Status](https://img.shields.io/travis/suryaprasanna/quora.svg?style=flat-square)](https://travis-ci.org/suryaprasanna/quora)
 # Quora
 Academic project to implement Quora website.
  
