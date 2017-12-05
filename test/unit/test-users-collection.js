@@ -108,7 +108,8 @@ describe('Database Tests', function() {
       });
     });
 
-    var q1 = Ques();
+    var ques_obj = new Ques();
+    var q1 = new Ques();
       q1.is_anonymous = false;
       q1.votes = 0;
       q1.created_on = new Date();
@@ -131,6 +132,7 @@ describe('Database Tests', function() {
             {throw new Error('Error while posting question')}
         ques_id = resp._id;
          QuesUtil.getQuestion(ques_id).then((data) => {
+            ques_obj = data;
             if(data.question == 'When did the great war start?'){
                 done();
             }
@@ -172,21 +174,25 @@ describe('Database Tests', function() {
         done();
     }); 
 
-    // it('Answer a question',function(done){
-    //   var ans = Ans({
-    //     user_id: '11',
-    //     is_anonymous: 'true',
-    //     votes: '0',
-    //     created_on: new Date(),
-    //     updated_on: new Date()
-    //   });
-    //   var question_id = "12";
-    //   var name = "Great war was started on 1914.";
-    //   AnsUtil.putAnswer(ans,question_id,name,err => {
-    //     if(err) {throw new Error('Should generate error!'); }
-    //     done();
-    //   });
-    // });
+    var ans = new Ans();
+    ans.user_id = user_obj._id;
+    ans.is_anonymous = "true";
+    ans.votes = "0";
+    ans.created_on = new Date();
+    ans.updated_on = new Date();
+
+    var ans_obj = new Ans();
+    it('Answer a question',function(done){
+    
+      var question_id = ques_id;
+      ans.answer = "Great war was started on 1914.";
+      AnsUtil.putAnswer(ans,ques_obj).then((data) => {
+        ans_obj = data;
+        done();
+      }).catch((err) => {
+        throw new Error('Should generate error!');
+      });
+    });
 
     // it('Check for Answer in database', function(done){
     //   var ans = Ans({
@@ -213,49 +219,36 @@ describe('Database Tests', function() {
 
 
 
-    // it('Edit an Answer',function(done){
-    //   var ans = Ans({
-    //     user_id: '11',
-    //     is_anonymous: 'true',
-    //     votes: '0',
-    //     created_on: new Date(),
-    //     updated_on: new Date()
-    //   });
-    //   var question_id = "12";
-    //   var name = "Great war was started on 1914.";
+     it('Edit an Answer',function(done){
+       
+        var answer = "Great war was started on July 28th, 1914.";
+         
+        AnsUtil.editAnswer(ans_obj, answer).then((data) => {
+            done(); 
+        }).catch((err) => {
+            throw new Error('Should generate error!');
+        });
+       
+     });
 
-    //   AnsUtil.putAnswer(ans,question_id,name,function(err,resp){
-    //     var id = resp.id;
-    //     var user_id = resp.user_id;
-    //     var answer = "Great war was started on July 28th, 1914.";
-    //     AnsUtil.getAnswer(id, function(err, a){
-    //       if(a.user_id != user_id) { throw new Error('Should generate error!');}
-    //       AnsUtil.editAnswer(a.e_id, answer,err => {
-    //         if(err) { throw new Error('Should generate error!'); }
-    //         done(); 
-    //       });
-    //     });
-    //     done();
-    //   }); 
-    // });
+     it('Should retrieve question details from test database', function(done) {
+       //Look up the 'ques' object previously saved.
+       Ques.findOne({question: 'When did the great war start?'}, (err, ques) => {
+         if(err) {throw err;}
+         if(ques.length === 0) {throw new Error('No data!');}
+         done();
+       });
+    });
 
-    // it('Should retrieve question details from test database', function(done) {
-    //   //Look up the 'ques' object previously saved.
-    //   Ques.findOne({question: 'Is question api working?'}, (err, ques) => {
-    //     if(err) {throw err;}
-    //     if(ques.length === 0) {throw new Error('No data!');}
-    //     done();
-    //   });
-    // });
-
-    // it('Should retrieve list of all questions from test database', function(done) {
-    //   QuesUtil.getQuestions(err => {
-    //     if(err) { throw new Error('Should generate error!'); }
-    //     done();
-    //   });
-    // });
-
-  });
+    it('Should retrieve list of all questions from test database', function(done) {
+      QuesUtil.getQuestions().then((data) => {
+        done();
+      }).catch((err) => {
+        throw new Error('Should generate error!'); 
+        done();
+      });
+    });
+});
   //After all tests are finished drop database and close connection
   after(function(done){
      mongoose.connection.db.dropDatabase(function(){
