@@ -11,3 +11,6 @@ services:
 branches:
   only:
     - master
+
+before script:
+ - sleep 15
