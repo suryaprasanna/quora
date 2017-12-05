@@ -30,7 +30,7 @@ module.exports = {
     commentOnAns : function(req, res) {
         console.log("req body: "+JSON.stringify(req.body));
         var newComment = new comment();
-        newComment.user_id = req.body.user_id;
+        newComment.user = req.body.user_id;
         newComment.comment = req.body.comment;
         newComment.doc = "answers";
         newComment.doc_id = req.body.answer_id;
@@ -52,7 +52,7 @@ module.exports = {
 
     commentOnComment : function(req, resp) {
         var newComment = new comment();
-        newComment.user_id = req.body.user_id;
+        newComment.user = req.body.user_id;
         newComment.comment = req.body.comment;
         newComment.doc = "comments";
         //newComment.doc_id = req.body.answer_id;
