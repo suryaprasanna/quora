@@ -8,7 +8,7 @@ var comment = require('../model/comment');
 module.exports = {
     commentOnQues : function(req, res){
         var newComment = new comment();
-        newComment.user_id = req.body.user_id;
+        newComment.user = req.body.user_id;
         newComment.comment = req.body.comment;
         newComment.doc = "questions";
         newComment.doc_id = req.body.question_id;
