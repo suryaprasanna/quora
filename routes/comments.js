@@ -8,9 +8,9 @@ var comment = require('../model/comment');
 module.exports = {
     commentOnQues : function(req, res){
         var newComment = new comment();
-        newComment.user_id = req.body.user_id;
+        newComment.user = req.body.user_id;
         newComment.comment = req.body.comment;
-        newComment.doc = "question";
+        newComment.doc = "questions";
         newComment.doc_id = req.body.question_id;
         
         newComment.save()
@@ -32,7 +32,7 @@ module.exports = {
         var newComment = new comment();
         newComment.user_id = req.body.user_id;
         newComment.comment = req.body.comment;
-        newComment.doc = "answer";
+        newComment.doc = "answers";
         newComment.doc_id = req.body.answer_id;
 
         console.log("ans id is: "+req.body.answer_id);
@@ -54,7 +54,7 @@ module.exports = {
         var newComment = new comment();
         newComment.user_id = req.body.user_id;
         newComment.comment = req.body.comment;
-        newComment.doc = "comment";
+        newComment.doc = "comments";
         //newComment.doc_id = req.body.answer_id;
 
         newComment.save()

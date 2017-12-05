@@ -12,7 +12,7 @@ module.exports = {
 		}).then((data) => {
 			var promise = new Promise((resolve, reject) => {
 				var arr = q.answers;
-				arr.push(data);
+				arr.unshift(data);
 				q.is_answered = true;
 				q.answers = arr;
 				resolve(q.save());
