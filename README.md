@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/suryaprasanna/quora.svg?style=flat-square)](https://travis-ci.org/suryaprasanna/quora)
+[![Build Status](https://img.shields.io/travis/suryaprasanna/quora.svg?style=flat-square)](https://travis-ci.org/suryaprasanna/quora) [![codecov.io](http://codecov.io/github/suryaprasanna/quora/coverage.svg?branch=master)](http://codecov.io/github/suryaprasanna/quora?branch=master)
 # Quora
 Academic project to implement Quora website.
  
