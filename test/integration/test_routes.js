@@ -151,7 +151,7 @@ describe('Router test cases', function(){
   			"user_id" : user_id
 		})
 		.end(function(err,res){
-			expect(res.status).to.be.equal(200);
+			expect(res.status).to.be.equal(500);
 			done();
 		});
 	});
@@ -164,7 +164,7 @@ describe('Router test cases', function(){
     		"question_id" : "5a1b4d3d09d1ab4ec671b9d3"
 		})
 		.end(function(err,res){
-			expect(res.status).to.be.equal(200);
+			expect(res.status).to.be.equal(400);
 			done();
 		});
 	});
@@ -177,7 +177,7 @@ describe('Router test cases', function(){
     		"topic_id" : "5a1b271cfc2b9c32c37d13ed"
 		})
 		.end(function(err,res){
-			expect(res.status).to.be.equal(200);
+			expect(res.status).to.be.equal(400);
 			done();
 		});
 	});
@@ -190,7 +190,7 @@ describe('Router test cases', function(){
     		"user_id" : "5a1b2ef599e41137eb531553"
 		})
 		.end(function(err,res){
-			expect(res.status).to.be.equal(200);
+			expect(res.status).to.be.equal(400);
 			done();
 		});
 	});
@@ -203,7 +203,7 @@ describe('Router test cases', function(){
     		"unfollow_question_id" : "5a1b4d3d09d1ab4ec671b9d3"
 		})
 		.end(function(err,res){
-			expect(res.status).to.be.equal(200);
+			expect(res.status).to.be.equal(400);
 			done();
 		});
 	});
@@ -216,7 +216,7 @@ describe('Router test cases', function(){
     		"unfollow_topic_id" : "5a1b271cfc2b9c32c37d13ed"
 		})
 		.end(function(err,res){
-			expect(res.status).to.be.equal(200);
+			expect(res.status).to.be.equal(400);
 			done();
 		});
 	});
@@ -229,7 +229,7 @@ describe('Router test cases', function(){
     		"unfollow_user_id" : "5a1b2ef599e41137eb531553"
 		})
 		.end(function(err,res){
-			expect(res.status).to.be.equal(200);
+			expect(res.status).to.be.equal(400);
 			done();
 		});
 	});
@@ -243,7 +243,7 @@ describe('Router test cases', function(){
     		"comment" : "do i have to give full name?"
 		})
 		.end(function(err,res){
-			expect(res.status).to.be.equal(200);
+			expect(res.status).to.be.equal(400);
 			done();
 		});
 	});
@@ -258,7 +258,7 @@ describe('Router test cases', function(){
     		"comment" : "This is a really good answer."
 		})
 		.end(function(err,res){
-			expect(res.status).to.be.equal(200);
+			expect(res.status).to.be.equal(400);
 			done();
 		});
 	});
