@@ -30,13 +30,13 @@ module.exports = {
 	},
 
 	commentOnAns : function(comment, a_id) {
-		console.log("comment is: "+comment.comment);
-		console.log("ans id is: "+a_id)
+		// console.log("comment is: "+comment.comment);
+		// console.log("ans id is: "+a_id)
 		var promise = new Promise((resolve, reject) => {
 			resolve(answerUtil.getAnswer(a_id));
 		}).then((data) => {
 			var promise = new Promise((resolve, reject) => {
-				console.log("answer obj is: "+data);
+				// console.log("answer obj is: "+data);
 				data.comments.push(comment);
 				resolve(data.save());
 			});

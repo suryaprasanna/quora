@@ -22,14 +22,14 @@ module.exports = {
 			for (var i = 0; i < fs.length; i++) {
 				var v1 = fs[i]._id;
 				if (v1 === v2) {
-					console.log("found user match");
+					// console.log("found user match");
 					f = true;
 				}
 			}
 
 			var promise = new Promise((resolve, reject) => {
 				if (!f) {
-					console.log("updating q");
+					// console.log("updating q");
 					fs.push(u);
 					q.followers = fs;
 					resolve(q.save());
@@ -39,7 +39,7 @@ module.exports = {
 			}).then((q1) => {
 				var promise = new Promise((resolve, reject) => {
 					if (!f) {
-						console.log("creating activity");
+						// console.log("creating activity");
 						var a = new activity();
 						a.doc = "questions";
 						a.doc_id = q1._id;
@@ -81,7 +81,7 @@ module.exports = {
 
 			var promise = new Promise((resolve, reject) => {
 				if (!f) {
-					console.log("updating topic");
+					// console.log("updating topic");
 					fs.push(u);
 					t.followers = fs;
 					resolve(t.save());
@@ -93,7 +93,7 @@ module.exports = {
 
 				var promise = new Promise((resolve, reject) => {
 					if (!f) {
-						console.log("updating user");
+						// console.log("updating user");
 						var ts = u.topics;
 						ts.push(t2);
 						u.topics = ts;
@@ -107,7 +107,7 @@ module.exports = {
 				res = u;
 				var promise = new Promise((resolve, reject) => {
 					if (!f) {
-						console.log("creating activity.");
+						// console.log("creating activity.");
 						var a = new activity();
 						a.doc = "topics";
 						a.doc_id = t_final._id;
@@ -139,14 +139,14 @@ module.exports = {
 			for (var i = 0; i < fs.length; i++) {
 				var v2 = fs[i]._id;
 				if (v1 === v2) {
-					console.log("found user match");
+					// console.log("found user match");
 					f = true;
 				}
 			}
 
 			var promise = new Promise((resolve, reject) => {
 				if (!f) {
-					console.log("updating user");
+					// console.log("updating user");
 					fs.push(u);
 					uf.followers = fs;
 					resolve(uf.save());
@@ -157,7 +157,7 @@ module.exports = {
 				
 				var promise = new Promise((resolve, reject) => {
 					if (!f) {
-						console.log("updating user2");
+						// console.log("updating user2");
 						u.following = uf1;
 						resolve(u.save());
 					} else {
@@ -169,7 +169,7 @@ module.exports = {
 				res = u1;
  				var promise = new Promise((resolve, reject) => {
  					if (!f) {
- 						console.log("creating activity.");
+ 						// console.log("creating activity.");
 						var a = new activity();
 						a.doc = "users";
 						a.doc_id = u1._id;
@@ -203,7 +203,7 @@ module.exports = {
 			for (var i = 0; i < fs.length; i++) {
 				var v1 = fs[i]._id;
 				if (v1 === v2) {
-					console.log("user match found.");
+					// console.log("user match found.");
 					f = true;
 				} else {
 					arr.push(fs[i]);
@@ -212,7 +212,7 @@ module.exports = {
 
 			var promise = new Promise((resolve, reject) => {
 				if (f) {
-					console.log("updating question.");
+					// console.log("updating question.");
 					q.followers = arr;
 					resolve(q.save());
 				} else {
@@ -221,7 +221,7 @@ module.exports = {
 			}).then((q1) => {
 				var promise = new Promise((resolve, reject) => {
 					if (f) {
-						console.log("creating activity");
+						// console.log("creating activity");
 						var a = new activity();
 						a.doc = "questions";
 						a.doc_id = q1._id;
@@ -255,7 +255,7 @@ module.exports = {
 			for (var i = 0; i < ts.length; i++) {
 				var v2 = ts[i]._id;
 				if (v1 === v2) {
-					console.log("user match found");
+					// console.log("user match found");
 					f = true;
 				} else {
 					arr.push(ts[i]);
@@ -264,7 +264,7 @@ module.exports = {
 
 			var promise = new Promise((resolve, reject) => {
 				if (f) {
-					console.log("updating topic.");
+					// console.log("updating topic.");
 					t.followers = arr;
 					resolve(t.save());
 				} else {
@@ -276,20 +276,20 @@ module.exports = {
 				var promise = new Promise((resolve, reject) => {
 					if (f) {
 						var vt = t1._id;
-						console.log("inside f user " + vt);
+						// console.log("inside f user " + vt);
 						var ts1 = u.topics;
 						var brr = [];
 						for (var i = 0; i < ts1.length; i++) {
 							var v3 = ts1[i]._id;
-							console.log(v3);
+							// console.log(v3);
 							if (vt === v3) {
-								console.log("user match found " + vt);
+								// console.log("user match found " + vt);
 							} else {
 								brr.push(v3);
 							}
 						}
 
-						console.log("updating user");
+						// console.log("updating user");
 						u.topics = brr;
 						resolve(u.save());
 					} else {
@@ -301,7 +301,7 @@ module.exports = {
 				res = u2;
 				var promise = new Promise((resolve, reject) => {
 					if (f) {
-						console.log("creating activity.");
+						// console.log("creating activity.");
 						var a = new activity();
 						a.doc = "topics";
 						a.doc_id = res_t._id;
@@ -334,7 +334,7 @@ module.exports = {
 			for (var i = 0; i < us.length; i++) {
 				var v2 = us[i]._id;
 				if (v1 === v2) {
-					console.log("user match found.");
+					// console.log("user match found.");
 					f = true;
 				} else {
 					arr.push(v2);
@@ -343,7 +343,7 @@ module.exports = {
 
 			var promise = new Promise((resolve, reject) => {
 				if (f) {
-					console.log("updating user");
+					// console.log("updating user");
 					u1.followers = arr;
 					resolve(u1.save());
 				} else {
@@ -358,12 +358,12 @@ module.exports = {
 						for (var i = 0; i < ts1.length; i++) {
 							var v3 = ts1[i]._id;
 							if (vt === v3) {
-								console.log("user match found");
+								// console.log("user match found");
 							} else {
 								brr.push(v3);
 							}
 						}
-						console.log("updating user2");
+						// console.log("updating user2");
 						u.following = brr;
 						resolve(u.save());
 					} else {
@@ -375,7 +375,7 @@ module.exports = {
 				res = u3;
 				var promise = new Promise((resolve, reject) => {
 					if (f) {
-						console.log("creating activity.");
+						// console.log("creating activity.");
 						var a = new activity();
 						a.doc = "users";
 						a.doc_id = u3._id;

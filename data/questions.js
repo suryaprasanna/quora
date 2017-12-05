@@ -63,7 +63,7 @@ module.exports = {
 			});
 			return promise;
 		}).then((res) => {
-
+			// console.log("question: " + q);
 			callback(false, q);
 
 			// // create feed entry for all followers of the topics for the question.
@@ -74,7 +74,7 @@ module.exports = {
 			// });
 			// return promise;
 		}).catch((err) => {
-			console.log(err);
+			// console.log(err);
 			callback(err, false);
 		});
 		return promise;

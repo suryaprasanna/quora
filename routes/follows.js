@@ -15,12 +15,12 @@ module.exports = {
                         res.status(200);
                         res.json({success: true, body: data, msg: "Successfully followed the question."});
                     }).catch((err) => {
-                        console.log("error ", err);
+                        // console.log("error ", err);
                         res.status(400);
                         res.json({success: false, msg: "Error in following the question"});
                     });
             }).catch((err) => {
-                console.log("error ", err);
+                // console.log("error ", err);
                 res.status(500);
                 res.json({success: false, msg: "Error in getting user details."});
             });
@@ -37,12 +37,12 @@ module.exports = {
                         res.status(200);
                         res.json({success: true, body: data, msg: "Successfully followed the topic."});
                     }).catch((err) => {
-                        console.log("error ", err);
+                        // console.log("error ", err);
                         res.status(400);
                         res.json({success: false, msg: "Error in following the topic."});
                     });
             }).catch((err) => {
-                console.log("error ", err);
+                // console.log("error ", err);
                 res.status(500);
                 res.json({success: false, msg: "Error in getting user details."});
             });
@@ -59,12 +59,12 @@ module.exports = {
                         res.status(200);
                         res.json({success: true, body: data, msg: "Successfully followed the user."});
                     }).catch((err) => {
-                        console.log("error ", err);
+                        // console.log("error ", err);
                         res.status(400);
                         res.json({success: false, msg: "Error in following the user."});
                     });
             }).catch((err) => {
-                console.log("error ", err);
+                // console.log("error ", err);
                 res.status(500);
                 res.json({success: false, msg: "Error in getting user details."});
             });
@@ -82,12 +82,12 @@ module.exports = {
                         res.status(200);
                         res.json({success: true, body: data, msg: "Successfully unfollowed the question."});
                     }).catch((err) => {
-                        console.log("error ", err);
+                        // console.log("error ", err);
                         res.status(400);
                         res.json({success: false, msg: "Error in unfollowing the question"});
                     });
             }).catch((err) => {
-                console.log("error ", err);
+                // console.log("error ", err);
                 res.status(500);
                 res.json({success: false, msg: "Error in getting user details."});
             });
@@ -104,12 +104,12 @@ module.exports = {
                         res.status(200);
                         res.json({success: true, body: data, msg: "Successfully unfollowed the topic."});
                     }).catch((err) => {
-                        console.log("error ", err);
+                        // console.log("error ", err);
                         res.status(400);
                         res.json({success: false, msg: "Error in unfollowing the topic."});
                     });
             }).catch((err) => {
-                console.log("error ", err);
+                // console.log("error ", err);
                 res.status(500);
                 res.json({success: false, msg: "Error in getting user details."});
             });
@@ -126,12 +126,12 @@ module.exports = {
                         res.status(200);
                         res.json({success: true, body: data, msg: "Successfully unfollowed the user."});
                     }).catch((err) => {
-                        console.log("error ", err);
+                        // console.log("error ", err);
                         res.status(400);
                         res.json({success: false, msg: "Error in unfollowing the user."});
                     });
             }).catch((err) => {
-                console.log("error ", err);
+                // console.log("error ", err);
                 res.status(500);
                 res.json({success: false, msg: "Error in getting user details."});
             });

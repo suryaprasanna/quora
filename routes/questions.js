@@ -23,11 +23,11 @@ module.exports = {
                     q.answers = a2;
                     obj.push(q);
                 }
-                console.log("qq: " + obj);
+                // console.log("qq: " + obj);
                 res.status(200);
                 res.json({success: true, body: obj, msg: "Successfully retrieved all questions."});
             }).catch((err) => {
-                console.log(err);
+                // console.log(err);
                 res.status(500);
                 res.json({success: false, msg: "Error in retieving questions data."});
             });
@@ -36,11 +36,11 @@ module.exports = {
     getUnansweredQuestions : function(req,res) {
         questionUtil.getUnansweredQuestions()
             .then((data) => {
-                console.log("qq: " + data);
+                // console.log("qq: " + data);
                 res.status(200);
                 res.json({success: true, body: data, msg: "Successfully retrieved unanswered questions."});
             }).catch((err) => {
-                console.log(err);
+                // console.log(err);
                 res.status(500);
                 res.json({success: false, msg: "Error in retieving unanswered questions data."});
             });
@@ -50,11 +50,11 @@ module.exports = {
         var question_id = req.query.question_id;
         questionUtil.getQuestion(question_id)
             .then((data) => {
-                console.log("qq: " + data);
+                // console.log("qq: " + data);
                 res.status(200);
                 res.json({success: true, body: data, msg: "Successfully retrieved question."});
             }).catch((err) => {
-                console.log(err);
+                // console.log(err);
                 res.status(500);
                 res.json({success: false, msg: "Error in retieving question data."});
             });
@@ -64,7 +64,7 @@ module.exports = {
         //console.log("aq " + req);        
 
         let q1 = new question();
-        console.log("req_body: "+ req.body);
+        // console.log("req_body: "+ req.body);
         q1.user = req.body.user_id;
         q1.is_anonymous = req.body.is_anonymous;
         q1.votes = 0;
@@ -110,6 +110,7 @@ module.exports = {
                 }
             })
             .catch(function (err) {
+                // console.log("err ", err);
                 resp.status(400);
                 resp.json({success: false, msg: "error in fetching user details"});
             });

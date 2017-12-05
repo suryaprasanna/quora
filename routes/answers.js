@@ -20,7 +20,7 @@ module.exports = {
                         res.json({success: true, body: data, msg: 'Successfully saved answer to db'});
                     })
                     .catch(function (err) {
-                        console.log("Failed to save answer to db.", err);
+                        // console.log("Failed to save answer to db.", err);
                         res.status(400);
                         res.json({success: false, msg: 'Failed to save answer to db'});
                     });
@@ -35,7 +35,7 @@ module.exports = {
         var id = req.body.answer_id;
         var answer = req.body.name;
         var user_id = req.body.user_id;
-        console.log(id);
+        // console.log(id);
         answerUtil.getAnswer(id)
             .then((ans) => {
                 if (ans.user._id === user_id) {
@@ -45,7 +45,7 @@ module.exports = {
                             resp.json({success: true, msg: "updated succesfully"});
                         })
                         .catch(function (err) {
-                            console.log(err);
+                            // console.log(err);
                             resp.status(500);
                             resp.json({success: false, msg: "failed to update to database."});
                         });
@@ -55,7 +55,7 @@ module.exports = {
                 }
             })
             .catch(function (err) {
-                console.log(err);
+                // console.log(err);
                 resp.status(500);
                 resp.json({success: false, msg: "error in fetching user details"});
             });
