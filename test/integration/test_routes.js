@@ -69,16 +69,20 @@ describe('Router test cases', function(){
 		});
 	});
 
+	var ques_id = '';
+
 	it('Post New Question', function(done){
 		chai.request('http://localhost:3000/question/ask')
 		.post('/')
 		.send({
-  			"user_id" : "quorauser",
+  			"user_id" : user_id,
   			"is_anonymous" : true,
   			"name" : "When did the great war start ?"
 		})
 		.end(function(err,res){
 			//console.log(res);
+			ques_id = res.body._id;
+			console.log("Question id is: "+ques_id);
 			expect(res.status).to.be.equal(200);
 			done();
 		});
@@ -88,12 +92,39 @@ describe('Router test cases', function(){
 		chai.request('http://localhost:3000/question/edit')
 		.post('/')
 		.send({
-  			"user_id" : "5a1cb3ef8b9b2103f6cce1a9",
+  			"user_id" : user_id,
   			"is_anonymous" : "true", //or false
   			"name" : "When did the great war of the seven kingdoms start ?"
 		})
 		.end(function(err,res){
 			//console.log(res);
+			expect(res.status).to.be.equal(200);
+			done();
+		});
+	});
+
+	it('Get UnAnswered Questions', function(done){
+		chai.request('http://localhost:3000/question/getUnanswered')
+		.get('/')
+		.end(function(err,res){
+			//console.log(res);
+			expect(res.status).to.be.equal(200);
+			done();
+		});
+	});
+
+	//Write get one question api
+
+	it('Post an Answer', function(done){
+		chai.request('http://localhost:3000/answer/put')
+		.post('/')
+		.send({
+  			"user_id" : user_id,
+    		"is_anonymous" : "true", //or false
+    		"name" : "Great war started in 1914 and lasted for 3 years!",
+    		"question_id" : ques_id
+		})
+		.end(function(err,res){
 			expect(res.status).to.be.equal(200);
 			done();
 		});
