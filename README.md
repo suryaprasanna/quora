@@ -2,6 +2,8 @@
 [![npm version](https://badge.fury.io/js/remap-istanbul.svg)](http://badge.fury.io/js/remap-istanbul)
 [![dependencies Status](https://david-dm.org/SitePen/remap-istanbul/status.svg)](https://david-dm.org/SitePen/remap-istanbul)
 [![devDependencies Status](https://david-dm.org/SitePen/remap-istanbul/dev-status.svg)](https://david-dm.org/SitePen/remap-istanbul?type=dev)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/SitePen/remap-istanbul.svg)](http://isitmaintained.com/project/SitePen/remap-istanbul "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/SitePen/remap-istanbul.svg)](http://isitmaintained.com/project/SitePen/remap-istanbul "Percentage of issues still open")
 
 # Quora
 Academic project to implement Quora website.
