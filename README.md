@@ -1,4 +1,8 @@
 [![Build Status](https://img.shields.io/travis/suryaprasanna/quora.svg?style=flat-square)](https://travis-ci.org/suryaprasanna/quora) [![codecov.io](http://codecov.io/github/suryaprasanna/quora/coverage.svg?branch=master)](http://codecov.io/github/suryaprasanna/quora?branch=master)
+[![npm version](https://badge.fury.io/js/remap-istanbul.svg)](http://badge.fury.io/js/remap-istanbul)
+[![dependencies Status](https://david-dm.org/SitePen/remap-istanbul/status.svg)](https://david-dm.org/SitePen/remap-istanbul)
+[![devDependencies Status](https://david-dm.org/SitePen/remap-istanbul/dev-status.svg)](https://david-dm.org/SitePen/remap-istanbul?type=dev)
+
 # Quora
 Academic project to implement Quora website.
  
@@ -46,8 +50,3 @@ Once the the installation is done, please clone the repository and inside the ro
 ```sh
 node app.js
 ```
-
-
-
-//npm install --save bluebird
-npm install promise
