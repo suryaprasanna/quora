@@ -14,10 +14,11 @@
     "bluebird": "^3.5.1",
     "chai": "^4.1.2",
     "elasticsearch": "*",
+    "express": "^4.16.2",
     "mocha": "^3.5.3",
     "mongoose": "^4.11.13",
-    "remap-istanbul": "^0.9.5",
-    "promise": "8.0.1"
+    "promise": "8.0.1",
+    "remap-istanbul": "^0.9.5"
   },
   "devDependencies": {
     "bcryptjs": "*",
