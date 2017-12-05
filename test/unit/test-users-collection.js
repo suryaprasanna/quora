@@ -17,6 +17,7 @@ const Ans = require('../../model/answer');
 const UserUtil = require('../../data/users');
 const QuesUtil = require('../../data/questions');
 const AnsUtil = require('../../data/answers');
+const TopicUtil = require('../../data/topics');
 var Promises = require('promise');
 
 //Create a new collection called 'Name'
@@ -245,9 +246,42 @@ describe('Database Tests', function() {
         done();
       }).catch((err) => {
         throw new Error('Should generate error!'); 
-        done();
       });
     });
+
+
+    //Topics API
+    var topic_obj = new Topic();
+
+    it('create a topic', function(done){
+        var topic = new Topic();
+        topic.topic  = "D.C.comics";
+        TopicUtil.createTopic(topic).then((data) => {
+            topic_obj = data;
+            done();
+        }).catch((err)=>{
+            throw new Error('Should generate error!'); 
+        });
+    });
+
+    it('get a topic', function(done){
+        TopicUtil.getTopic(topic_obj._id).then((data) => {
+            done();
+        }).catch((err) => {
+            throw new Error('Should generate error!'); 
+        });
+    });
+
+    it('get list of all Topics', function(done){
+        TopicUtil.getTopics().then((data) => {
+            done();
+        }).catch((err) => {
+            throw new Error('Should generate error!'); 
+      });
+    });
+
+
+
 });
   //After all tests are finished drop database and close connection
   after(function(done){
