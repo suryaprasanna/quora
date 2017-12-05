@@ -10,7 +10,7 @@ var commentSchema = new Schema({
   doc_id : {type : String}, 
   created_on: {type: Date, default: Date.now},
   updated_on: {type: Date}
-});
+}, { usePushEach: true });
 
 // the schema is useless so far
 // we need to create a model using it

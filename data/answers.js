@@ -12,22 +12,14 @@ module.exports = {
 		}).then((data) => {
 			var promise = new Promise((resolve, reject) => {
 				var arr = q.answers;
-				arr.push(data);
+				arr.unshift(data);
 				q.is_answered = true;
 				q.answers = arr;
 				resolve(q.save());
-			})
-			.catch((err) => {
-				console.log(err);
 			});
 			return promise;
 		});
-
-		// add activity and feed entries
-
-
-
-
+		//TODO  Add activity
 		return promise;
 	},
 
@@ -38,12 +30,7 @@ module.exports = {
 			resolve(ans.save());
 		});
 
-
-		// add activity and feed entries
-		
-
-
-		
+		//TODO add activity and feed entries
 
 		return promise;
 	},

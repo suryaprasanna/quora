@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "node_modules/.bin/mocha -u exports test/*",
-    "start": "node app"
+    "start": "node app.js",
+    "testcoverage": "bin/coverage.sh"
   },
   "author": "",
   "license": "ISC",
@@ -13,8 +14,11 @@
     "bluebird": "^3.5.1",
     "chai": "^4.1.2",
     "elasticsearch": "*",
+    "express": "^4.16.2",
     "mocha": "^3.5.3",
-    "mongoose": "^4.11.13"
+    "mongoose": "^4.11.13",
+    "promise": "8.0.1",
+    "remap-istanbul": "^0.9.5"
   },
   "devDependencies": {
     "bcryptjs": "*",
@@ -22,7 +26,9 @@
     "chai": "^4.1.2",
     "jsonwebtoken": "*",
     "mocha": "^3.5.3",
+    "nyc": "^11.3.0",
     "passport-jwt": "*",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "promise": "*"
   }
 }
