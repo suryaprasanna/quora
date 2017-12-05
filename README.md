@@ -2,6 +2,7 @@
 [![npm version](https://badge.fury.io/js/remap-istanbul.svg)](http://badge.fury.io/js/remap-istanbul)
 [![dependencies Status](https://david-dm.org/SitePen/remap-istanbul/status.svg)](https://david-dm.org/SitePen/remap-istanbul)
 [![devDependencies Status](https://david-dm.org/SitePen/remap-istanbul/dev-status.svg)](https://david-dm.org/SitePen/remap-istanbul?type=dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/suryaprasanna/quora.svg)](http://isitmaintained.com/project/suryaprasanna/quora "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/suryaprasanna/quora.svg)](http://isitmaintained.com/project/suryaprasanna/quora "Percentage of issues still open")
 
