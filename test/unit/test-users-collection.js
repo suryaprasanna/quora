@@ -18,6 +18,7 @@ const UserUtil = require('../../data/users');
 const QuesUtil = require('../../data/questions');
 const AnsUtil = require('../../data/answers');
 const TopicUtil = require('../../data/topics');
+const FollowUtil = require('../../data/follows');
 var Promises = require('promise');
 
 //Create a new collection called 'Name'
@@ -41,6 +42,15 @@ describe('Database Tests', function() {
     var user_obj = new User();
     var ques_id = '';
     //Save object with 'name' value of 'Mike"
+
+    var newUser = new User();
+    newUser.name = 'user1';
+    newUser.username = 'user1';
+    newUser.email = 'user1@ufl.edu';
+    newUser.password = 'password';
+
+    var newUser_obj = new User();
+
     it('New user saved to test database', function(done) {
       var testName = User({
         name: 'Mike',
@@ -49,6 +59,8 @@ describe('Database Tests', function() {
         password: 'mikamike'
       }); 
       UserUtil.addUser(testName, done);
+
+      
     });
 
     it('Should authenticate the above added user', function(done){
@@ -278,6 +290,67 @@ describe('Database Tests', function() {
         }).catch((err) => {
             throw new Error('Should generate error!'); 
       });
+    });
+
+    var flw = '';
+    var newUser_id = '';
+    //Follow API
+    it('Follow Question',function(done){
+        UserUtil.addUser(newUser, function(err, user){
+            newUser_obj = user;
+            FollowUtil.followQuestion(ques_id,user).then((data)=>{
+                flw = data;
+                done();
+            }).catch((err)=>{
+                throw new Error('Should generate error!'); 
+            });
+        });
+        
+    });
+
+    
+    it('Follow Topic', function(done){
+        FollowUtil.followTopic(topic_obj._id,user_obj).then((data)=>{
+            done();
+        }).catch((err)=>{
+            throw new Error('Should generate error!'); 
+        });
+
+    });
+
+    it('Follow User', function(done){
+        FollowUtil.followUser(newUser_obj._id,user_obj).then((data)=>{
+            done();
+        }).catch((err)=>{
+            throw new Error('Should generate error!');
+        })
+
+    });
+
+    it('Unfollow Question',function(done){
+        FollowUtil.unfollowQuestion(ques_id,newUser_obj).then((data)=>{
+            done();
+        }).catch((err)=>{
+            throw new Error('Should generate error!');
+        });
+        
+    });
+
+    it('Unfollow Topic', function(done){
+        FollowUtil.unfollowTopic(topic_obj._id,user_obj).then((data)=>{
+            done();
+        }).catch((err)=>{
+            throw new Error('Should generate error!');
+        });
+    });
+
+    it('Unfollow User', function(done){
+        FollowUtil.unfollowUser(newUser_obj._id,user_obj).then((data)=>{
+            done();
+        }).catch((err)=>{
+            console.log(err);
+            throw new Error('Should generate error!');
+        });
     });
 
 

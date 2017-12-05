@@ -17,10 +17,10 @@ module.exports = {
 		}).then((q) => {
 			var fs = q.followers;
 			var f = false;
-			var v2 = u._id.toString();
+			var v2 = u._id;
 			
 			for (var i = 0; i < fs.length; i++) {
-				var v1 = fs[i]._id.toString();
+				var v1 = fs[i]._id;
 				if (v1 === v2) {
 					console.log("found user match");
 					f = true;
@@ -69,10 +69,10 @@ module.exports = {
 		}).then((t) => {
 			var fs = t.followers;
 			var f = false;
-			var v1 = u._id.toString();
+			var v1 = u._id;
 
 			for (var i = 0; i < fs.length; i++) {
-				var v2 = fs[i]._id.toString();
+				var v2 = fs[i]._id;
 				if (v1 === v2) {
 					console.log("found user match");
 					f = true;
@@ -135,9 +135,9 @@ module.exports = {
 		}).then((uf) => {
 			var fs = uf.followers;
 			var f = false;
-			var v1 = u._id.toString();
+			var v1 = u._id;
 			for (var i = 0; i < fs.length; i++) {
-				var v2 = fs[i]._id.toString();
+				var v2 = fs[i]._id;
 				if (v1 === v2) {
 					console.log("found user match");
 					f = true;
@@ -199,9 +199,9 @@ module.exports = {
 			var fs = q.followers;
 			var arr = [];
 			var f = false;
-			var v2 = u._id.toString();
+			var v2 = u._id;
 			for (var i = 0; i < fs.length; i++) {
-				var v1 = fs[i]._id.toString();
+				var v1 = fs[i]._id;
 				if (v1 === v2) {
 					console.log("user match found.");
 					f = true;
@@ -251,9 +251,9 @@ module.exports = {
 			var ts = t.followers;
 			var arr = [];
 			var f = false;
-			var v1 = u._id.toString();
+			var v1 = u._id;
 			for (var i = 0; i < ts.length; i++) {
-				var v2 = ts[i]._id.toString();
+				var v2 = ts[i]._id;
 				if (v1 === v2) {
 					console.log("user match found");
 					f = true;
@@ -275,12 +275,12 @@ module.exports = {
 
 				var promise = new Promise((resolve, reject) => {
 					if (f) {
-						var vt = t1._id.toString();
+						var vt = t1._id;
 						console.log("inside f user " + vt);
 						var ts1 = u.topics;
 						var brr = [];
 						for (var i = 0; i < ts1.length; i++) {
-							var v3 = ts1[i]._id.toString();
+							var v3 = ts1[i]._id;
 							console.log(v3);
 							if (vt === v3) {
 								console.log("user match found " + vt);
@@ -330,9 +330,9 @@ module.exports = {
 			var us = u1.followers;
 			var arr = [];
 			var f = false;
-			var v1 = u._id.toString();
+			var v1 = u._id;
 			for (var i = 0; i < us.length; i++) {
-				var v2 = us[i]._id.toString();
+				var v2 = us[i]._id;
 				if (v1 === v2) {
 					console.log("user match found.");
 					f = true;
@@ -354,9 +354,9 @@ module.exports = {
 					if (f) {
 						var ts1 = u.following;
 						var brr = [];
-						var vt = u2._id.toString();
+						var vt = u2._id;
 						for (var i = 0; i < ts1.length; i++) {
-							var v3 = ts1[i]._id.toString();
+							var v3 = ts1[i]._id;
 							if (vt === v3) {
 								console.log("user match found");
 							} else {
