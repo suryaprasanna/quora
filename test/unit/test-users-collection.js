@@ -15,6 +15,8 @@ const Ans = require('../../model/answer');
 const UserUtil = require('../../data/users');
 const QuesUtil = require('../../data/questions');
 const AnsUtil = require('../../data/answers');
+var Promises = require('promise');
+
 //Create a new collection called 'Name'
 describe('Database Tests', function() {
   //Before starting the test, create a sandboxed database connection
