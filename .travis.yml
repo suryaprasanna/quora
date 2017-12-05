@@ -17,7 +17,7 @@ before script:
  - mongo mydb_test --eval 'db.addUser("travis", "test");'
 
 script:
-  - sudo systemctl start elasticsearch
+  - sudo service elasticsearch start
   - sudo rm /var/lib/mongodb/mongod.lock
   - sudo service mongod restart
   - npm test
